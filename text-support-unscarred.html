@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Support | Unscarred</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-void: #050507;
+      --bg-deep: #0a0a0f;
+      --card-glass: rgba(12, 12, 18, 0.85);
+      --primary: #a33b5c;
+      --primary-glow: rgba(163, 59, 92, 0.4);
+      --secondary: #7c5cbf;
+      --secondary-glow: rgba(124, 92, 191, 0.3);
+      --accent: #c9763d;
+      --accent-soft: #e8a165;
+      --text-main: #ece8e1;
+      --text-soft: #9a958c;
+      --text-dim: #5c5955;
+      --border-glass: rgba(255,255,255,0.06);
+      --radius-lg: 20px;
+      --radius-sm: 12px;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Outfit', system-ui, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-void);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Atmospheric background */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(163, 59, 92, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(124, 92, 191, 0.08) 0%, transparent 40%),
+        radial-gradient(ellipse 50% 50% at 20% 80%, rgba(201, 118, 61, 0.06) 0%, transparent 40%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      padding: 8px 16px;
+      background: rgba(201, 118, 61, 0.1);
+      border-radius: 999px;
+      border: 1px solid rgba(201, 118, 61, 0.2);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 6vw, 3.5rem);
+      font-weight: 600;
+      font-style: italic;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      text-shadow: 0 4px 30px var(--primary-glow);
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--text-soft);
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+
+    /* Phone mockup */
+    .phone-preview {
+      max-width: 340px;
+      margin: 40px auto;
+      background: linear-gradient(165deg, rgba(20, 18, 25, 0.95), rgba(10, 10, 14, 0.98));
+      border-radius: 32px;
+      border: 1px solid var(--border-glass);
+      padding: 16px;
+      box-shadow: 
+        0 20px 60px rgba(0,0,0,0.5),
+        0 0 0 1px rgba(255,255,255,0.03);
+    }
+
+    .phone-notch {
+      width: 100px;
+      height: 24px;
+      background: #000;
+      border-radius: 20px;
+      margin: 0 auto 16px;
+    }
+
+    .phone-messages {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 12px;
+    }
+
+    .msg {
+      max-width: 85%;
+      padding: 12px 16px;
+      border-radius: 18px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      animation: msg-fade 0.5s ease-out backwards;
+    }
+
+    .msg.them {
+      background: #2a2a30;
+      align-self: flex-start;
+      border-bottom-left-radius: 6px;
+    }
+
+    .msg.you {
+      background: var(--primary);
+      align-self: flex-end;
+      border-bottom-right-radius: 6px;
+    }
+
+    .msg:nth-child(1) { animation-delay: 0.2s; }
+    .msg:nth-child(2) { animation-delay: 0.6s; }
+    .msg:nth-child(3) { animation-delay: 1s; }
+    .msg:nth-child(4) { animation-delay: 1.4s; }
+
+    @keyframes msg-fade {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Section styling */
+    section {
+      padding: 60px 0;
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 600;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+
+    /* The problem section */
+    .problem {
+      background: linear-gradient(165deg, rgba(163, 59, 92, 0.05), transparent);
+      border-radius: var(--radius-lg);
+      padding: 40px 32px;
+      margin: 40px 0;
+      border: 1px solid rgba(163, 59, 92, 0.1);
+    }
+
+    .problem p {
+      font-size: 1.05rem;
+      color: var(--text-soft);
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+
+    .problem p:last-child {
+      margin-bottom: 0;
+    }
+
+    .problem strong {
+      color: var(--text-main);
+    }
+
+    /* What this is section */
+    .what-this-is {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin: 40px 0;
+    }
+
+    @media (max-width: 640px) {
+      .what-this-is {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .not-this, .this-is {
+      padding: 28px 24px;
+      border-radius: var(--radius-lg);
+    }
+
+    .not-this {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .this-is {
+      background: linear-gradient(165deg, rgba(124, 92, 191, 0.1), rgba(163, 59, 92, 0.05));
+      border: 1px solid rgba(124, 92, 191, 0.15);
+    }
+
+    .not-this h3, .this-is h3 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .not-this h3 {
+      color: var(--text-dim);
+    }
+
+    .this-is h3 {
+      color: var(--secondary);
+    }
+
+    .not-this ul, .this-is ul {
+      list-style: none;
+    }
+
+    .not-this li, .this-is li {
+      padding: 8px 0;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .not-this li {
+      color: var(--text-dim);
+    }
+
+    .not-this li::before {
+      content: "✕";
+      color: #6b4a4a;
+      font-weight: 600;
+    }
+
+    .this-is li::before {
+      content: "→";
+      color: var(--secondary);
+      font-weight: 600;
+    }
+
+    /* Packages section */
+    .packages {
+      margin: 60px 0;
+    }
+
+    .packages-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .package-card {
+      background: linear-gradient(165deg, rgba(20, 18, 25, 0.9), rgba(12, 11, 16, 0.95));
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      border: 1px solid var(--border-glass);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .package-card:hover {
+      border-color: rgba(163, 59, 92, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+
+    .package-card.featured {
+      background: linear-gradient(165deg, rgba(163, 59, 92, 0.12), rgba(12, 11, 16, 0.95));
+      border-color: rgba(163, 59, 92, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .package-card.featured::before {
+      content: "MOST POPULAR";
+      position: absolute;
+      top: 16px;
+      right: -32px;
+      background: var(--primary);
+      color: white;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 4px 40px;
+      transform: rotate(45deg);
+    }
+
+    @media (max-width: 640px) {
+      .package-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+    }
+
+    .package-info h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    @media (max-width: 640px) {
+      .package-info h3 {
+        justify-content: center;
+      }
+    }
+
+    .package-info .tagline {
+      font-size: 0.85rem;
+      color: var(--text-soft);
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+
+    .package-info .features {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+    }
+
+    .package-pricing {
+      text-align: right;
+    }
+
+    @media (max-width: 640px) {
+      .package-pricing {
+        text-align: center;
+      }
+    }
+
+    .package-pricing .price {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .package-pricing .period {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+
+    .package-btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .package-btn:hover {
+      background: #b8446a;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(163, 59, 92, 0.4);
+    }
+
+    .package-btn.secondary {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .package-btn.secondary:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.25);
+    }
+
+    /* Sample texts section */
+    .sample-texts {
+      background: linear-gradient(165deg, rgba(10, 10, 14, 0.95), rgba(5, 5, 7, 0.98));
+      border-radius: var(--radius-lg);
+      padding: 40px 32px;
+      margin: 60px 0;
+      border: 1px solid var(--border-glass);
+    }
+
+    .text-example {
+      margin: 24px 0;
+      padding: 20px;
+      background: rgba(0,0,0,0.3);
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--secondary);
+    }
+
+    .text-example .context {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+
+    .text-example .exchange {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .text-example .line {
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .text-example .line.them {
+      color: var(--text-soft);
+    }
+
+    .text-example .line.them::before {
+      content: "You: ";
+      color: var(--text-dim);
+      font-weight: 600;
+    }
+
+    .text-example .line.me {
+      color: var(--text-main);
+      padding-left: 20px;
+    }
+
+    .text-example .line.me::before {
+      content: "→ ";
+      color: var(--primary);
+    }
+
+    /* Best Friend highlight */
+    .best-friend-section {
+      text-align: center;
+      padding: 60px 0;
+    }
+
+    .bf-card {
+      background: linear-gradient(165deg, rgba(163, 59, 92, 0.15), rgba(124, 92, 191, 0.08));
+      border-radius: 28px;
+      padding: 48px 40px;
+      border: 1px solid rgba(163, 59, 92, 0.25);
+      max-width: 600px;
+      margin: 0 auto;
+      box-shadow: 
+        0 20px 60px rgba(163, 59, 92, 0.15),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+
+    .bf-card .emoji {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+
+    .bf-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 600;
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+
+    .bf-card .price-big {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .bf-card .price-period {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      margin-bottom: 20px;
+    }
+
+    .bf-card p {
+      font-size: 1rem;
+      color: var(--text-soft);
+      margin-bottom: 24px;
+      line-height: 1.7;
+    }
+
+    .bf-features {
+      text-align: left;
+      margin: 24px 0;
+    }
+
+    .bf-features li {
+      padding: 8px 0;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .bf-features li::before {
+      content: "✓";
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .bf-card .cta-btn {
+      display: inline-block;
+      padding: 16px 40px;
+      background: linear-gradient(135deg, var(--primary), #8a2a4a);
+      color: white;
+      text-decoration: none;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 30px rgba(163, 59, 92, 0.4);
+    }
+
+    .bf-card .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(163, 59, 92, 0.5);
+    }
+
+    .bf-card .trial-note {
+      margin-top: 16px;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    /* FAQ section */
+    .faq {
+      margin: 60px 0;
+    }
+
+    .faq-item {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border-glass);
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-q {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .faq-a {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      line-height: 1.7;
+    }
+
+    /* Final CTA */
+    .final-cta {
+      text-align: center;
+      padding: 80px 0;
+    }
+
+    .final-cta h2 {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .final-cta p {
+      color: var(--text-soft);
+      margin-bottom: 32px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-buttons a {
+      padding: 16px 32px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: all 0.3s ease;
+    }
+
+    .cta-buttons .primary {
+      background: linear-gradient(135deg, var(--primary), #8a2a4a);
+      color: white;
+      box-shadow: 0 8px 30px rgba(163, 59, 92, 0.4);
+    }
+
+    .cta-buttons .primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(163, 59, 92, 0.5);
+    }
+
+    .cta-buttons .secondary {
+      background: transparent;
+      color: var(--text-soft);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .cta-buttons .secondary:hover {
+      border-color: rgba(255,255,255,0.3);
+      color: var(--text-main);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      border-top: 1px solid var(--border-glass);
+    }
+
+    footer a {
+      color: var(--text-soft);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">📱 Text Support</div>
+      <h1>Someone who gets it.<br>In your phone.<br>When you need them.</h1>
+      <p class="hero-sub">Not therapy. Not a chatbot. Just a real person who knows your patterns - ready to help before you spiral.</p>
+
+      <div class="phone-preview">
+        <div class="phone-notch"></div>
+        <div class="phone-messages">
+          <div class="msg them">I'm about to send a really unhinged text</div>
+          <div class="msg you">Screenshot it. Send to me first. Do not send to him.</div>
+          <div class="msg them">[screenshot]</div>
+          <div class="msg you">Okay that's your flooded mirror talking. What do you actually need right now?</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Problem -->
+  <section>
+    <div class="container">
+      <div class="problem">
+        <p>You know that moment when you're <strong>activated</strong> - heart racing, fingers hovering over the keyboard, about to do the thing you always regret?</p>
+        <p>You know it's your pattern. You know you'll feel stupid later. But in the moment, you can't stop yourself.</p>
+        <p><strong>What if you had someone to text first?</strong></p>
+        <p>Someone who knows your specific pattern. Who can say <em>"that's your abandonment alarm, not reality"</em> before you blow everything up. Who can help you write the text that doesn't destroy trust.</p>
+        <p>Not a therapist scheduling you for next Thursday. <strong>Someone in your pocket right now.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What this is / isn't -->
+  <section>
+    <div class="container">
+      <div class="section-label">What you're getting</div>
+      <h2>This isn't therapy. It's backup.</h2>
+      
+      <div class="what-this-is">
+        <div class="not-this">
+          <h3>Not this</h3>
+          <ul>
+            <li>Clinical language</li>
+            <li>Scheduled "sessions"</li>
+            <li>"How does that make you feel?"</li>
+            <li>Professional distance</li>
+            <li>24/7 crisis hotline</li>
+            <li>A replacement for therapy</li>
+          </ul>
+        </div>
+        <div class="this-is">
+          <h3>This is</h3>
+          <ul>
+            <li>"That's your exposure alarm, not reality"</li>
+            <li>Real-time pattern interrupts</li>
+            <li>"Don't send that. Try this instead."</li>
+            <li>Someone who's been in the impact zone</li>
+            <li>Support during reasonable hours</li>
+            <li>A friend who happens to see patterns</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sample Texts -->
+  <section>
+    <div class="container">
+      <div class="sample-texts">
+        <div class="section-label">What it actually looks like</div>
+        <h2>Real conversations, not scripts</h2>
+
+        <div class="text-example">
+          <div class="context">When you're about to spiral</div>
+          <div class="exchange">
+            <div class="line them">He hasn't texted back in 4 hours. I know he's done.</div>
+            <div class="line me">Is that real or is that your abandonment alarm?</div>
+            <div class="line them">...probably the alarm</div>
+            <div class="line me">What's one actual fact about the situation?</div>
+            <div class="line them">He said he had a busy day at work</div>
+            <div class="line me">Okay. So we have: busy day (fact) vs. he's leaving (alarm). Which one has evidence?</div>
+          </div>
+        </div>
+
+        <div class="text-example">
+          <div class="context">When you need a script</div>
+          <div class="exchange">
+            <div class="line them">I need to tell her that hurt me but I don't know how without sounding dramatic</div>
+            <div class="line me">Try: "When you said X, I felt Y. I'm not blaming you, I just need you to know it landed hard."</div>
+            <div class="line them">That's so much simpler than what I had</div>
+            <div class="line me">Your first draft was probably 3 paragraphs of over-explaining. This is what you actually mean.</div>
+          </div>
+        </div>
+
+        <div class="text-example">
+          <div class="context">When you did the thing</div>
+          <div class="exchange">
+            <div class="line them">I sent the unhinged text. He hasn't responded.</div>
+            <div class="line me">Okay. What's done is done. What do you need right now?</div>
+            <div class="line them">To not send 5 more</div>
+            <div class="line me">Put the phone in another room. Set a timer for 2 hours. We'll regroup after. You survived. That's the update.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Packages -->
+  <section class="packages">
+    <div class="container">
+      <div class="section-label">Choose your level</div>
+      <h2>Packages that fit where you are</h2>
+
+      <div class="packages-grid">
+        
+        <div class="package-card">
+          <div class="package-info">
+            <h3>🆘 Crisis Week</h3>
+            <p class="tagline">"I'm in it right now and I need backup"</p>
+            <p class="features">7 days unlimited texting • Response within 2-4 hours • Pattern identification • Real-time scripts</p>
+          </div>
+          <div class="package-pricing">
+            <div class="price">$27</div>
+            <div class="period">one-time / 7 days</div>
+            <a href="#" class="package-btn secondary">Get Started</a>
+          </div>
+        </div>
+
+        <div class="package-card">
+          <div class="package-info">
+            <h3>🔥 Pattern Interrupt</h3>
+            <p class="tagline">"Help me catch myself before I do the thing"</p>
+            <p class="features">14 days • Daily check-ins • Pattern tracking • Weekly report • 3 voice memos</p>
+          </div>
+          <div class="package-pricing">
+            <div class="price">$47</div>
+            <div class="period">one-time / 14 days</div>
+            <a href="#" class="package-btn secondary">Get Started</a>
+          </div>
+        </div>
+
+        <div class="package-card featured">
+          <div class="package-info">
+            <h3>👯 Best Friend Mode</h3>
+            <p class="tagline">"Be in my phone every day"</p>
+            <p class="features">Daily texts • Anytime support • 1-2hr response • Voice memos • Weekly recaps • Real talk, not clinical speak</p>
+          </div>
+          <div class="package-pricing">
+            <div class="price">$127</div>
+            <div class="period">per month</div>
+            <a href="#" class="package-btn">Start Free Trial</a>
+          </div>
+        </div>
+
+        <div class="package-card">
+          <div class="package-info">
+            <h3>⚡ Intensive Support</h3>
+            <p class="tagline">"I'm going through something major"</p>
+            <p class="features">Everything in Best Friend + 2x monthly calls • Priority response • Custom protocol • Direct access</p>
+          </div>
+          <div class="package-pricing">
+            <div class="price">$197</div>
+            <div class="period">per month</div>
+            <a href="#" class="package-btn secondary">Apply Now</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Best Friend Highlight -->
+  <section class="best-friend-section">
+    <div class="container">
+      <div class="bf-card">
+        <div class="emoji">👯</div>
+        <h3>Best Friend Mode</h3>
+        <div class="price-big">$127<span style="font-size: 1rem; font-weight: 400;">/mo</span></div>
+        <div class="price-period">or try it for $37/week</div>
+        
+        <p>The friend who's been through it, sees your patterns, and is in your phone every single day. No clinical distance. No scheduling. Just someone who actually gets it.</p>
+
+        <ul class="bf-features">
+          <li>Daily check-in: "What's the vibe today?"</li>
+          <li>Text anytime you're activated</li>
+          <li>Pattern callouts in real-time</li>
+          <li>"What should I text them?" support</li>
+          <li>Hype when you need it, reality checks when you're spiraling</li>
+          <li>Voice memos both ways</li>
+          <li>Weekly recap of patterns and wins</li>
+        </ul>
+
+        <a href="#" class="cta-btn">Try 1 Week for $37</a>
+        <p class="trial-note">No commitment. See if it fits.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="container">
+      <div class="section-label">Questions</div>
+      <h2>What you're probably wondering</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">What are your response hours?</div>
+        <div class="faq-a">I respond between 9am-8pm in my timezone. After hours messages get answered first thing in the morning. This isn't a crisis line - it's sustainable support.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Is this therapy?</div>
+        <div class="faq-a">No. I'm not a licensed therapist and this isn't a replacement for therapy. It's pattern support - someone who knows your nervous system patterns and can help you interrupt them in real-time. If you need clinical support, I'll tell you.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What if I'm in crisis?</div>
+        <div class="faq-a">I'm not equipped for crisis intervention. If you're in danger or having thoughts of self-harm, please reach out to a crisis line (988 in the US). I'm here for pattern support, not emergencies.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How is this different from just texting a friend?</div>
+        <div class="faq-a">Your friends love you but they can't see your patterns objectively. I can say "that's your abandonment alarm" without getting pulled into the drama. And I won't get exhausted by your spirals - it's literally what I'm here for.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Can I cancel anytime?</div>
+        <div class="faq-a">Yes. Monthly subscriptions can be cancelled before your next billing date. No questions, no guilt trips.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What if it's not for me?</div>
+        <div class="faq-a">Try a one-week trial first. $27-37 depending on the tier. If it doesn't land, you know before you commit to more.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta">
+    <div class="container">
+      <h2>Stop spiraling alone.</h2>
+      <p>The next time you're activated, you'll have someone to text first. Someone who sees what you can't see when you're in it.</p>
+      
+      <div class="cta-buttons">
+        <a href="#" class="primary">Start Best Friend Trial - $37</a>
+        <a href="#" class="secondary">Try Crisis Week - $27</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; Unscarred. <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+      <p style="margin-top: 8px;">This is pattern support, not therapy. Please seek professional help for clinical needs.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
+
