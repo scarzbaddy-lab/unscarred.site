@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirror Quiz | Unscarred</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a0a0f 0%, #2d1b25 100%);
+            color: #e8d5d0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(45, 27, 37, 0.8);
+            border: 2px solid #8b3a5e;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(139, 58, 94, 0.3);
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #c9a89c;
+            text-decoration: none;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+
+        .back-link:hover {
+            color: #d4737a;
+        }
+
+        h1 {
+            color: #d4737a;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #c9a89c;
+            line-height: 1.6;
+        }
+
+        .diagnostic-preview {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            border-left: 4px solid #8b3a5e;
+        }
+
+        .flag-item {
+            margin: 12px 0;
+            padding: 10px 15px;
+            border-radius: 4px;
+            background: rgba(139, 58, 94, 0.2);
+            border-left: 3px solid #d4737a;
+        }
+
+        .flag-item strong {
+            color: #d4737a;
+        }
+
+        .start-button {
+            width: 100%;
+            padding: 18px;
+            font-size: 1.2em;
+            background: linear-gradient(135deg, #8b3a5e 0%, #d4737a 100%);
+            border: none;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .start-button:hover {
+            transform: scale(1.02);
+        }
+
+        .progress {
+            width: 100%;
+            height: 6px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 3px;
+            margin-bottom: 30px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #8b3a5e 0%, #d4737a 100%);
+            transition: width 0.3s ease;
+        }
+
+        .question-container {
+            display: none;
+        }
+
+        .question-container.active {
+            display: block;
+        }
+
+        .question-number {
+            color: #8b3a5e;
+            font-size: 0.8em;
+            margin-bottom: 10px;
+        }
+
+        .question {
+            font-size: 1.3em;
+            color: #d4737a;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid #4a2f3d;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #c9a89c;
+        }
+
+        .option:hover {
+            background: rgba(139, 58, 94, 0.2);
+            border-color: #8b3a5e;
+        }
+
+        .option.selected {
+            background: rgba(139, 58, 94, 0.4);
+            border-color: #d4737a;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1em;
+            border: 2px solid #8b3a5e;
+            background: rgba(139, 58, 94, 0.3);
+            color: #e8d5d0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Georgia', serif;
+        }
+
+        button:hover {
+            background: rgba(139, 58, 94, 0.5);
+        }
+
+        button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .results {
+            display: none;
+        }
+
+        .results.active {
+            display: block;
+        }
+
+        .archetype-name {
+            font-size: 2em;
+            color: #d4737a;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .archetype-tagline {
+            font-size: 1.2em;
+            color: #c9a89c;
+            font-style: italic;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .archetype-card {
+            margin: 40px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(139, 58, 94, 0.3), rgba(212, 115, 122, 0.2));
+            border-radius: 12px;
+            border: 2px solid #d4737a;
+        }
+
+        .archetype-card h3 {
+            color: #d4737a;
+            font-size: 1.6em;
+            margin-bottom: 15px;
+        }
+
+        .archetype-card p {
+            color: #c9a89c;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .breakdown-section {
+            margin: 30px 0;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            border-left: 4px solid #8b3a5e;
+        }
+
+        .breakdown-section h4 {
+            color: #d4737a;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        .breakdown-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .breakdown-section li {
+            padding: 8px 0;
+            color: #c9a89c;
+            border-bottom: 1px solid rgba(139, 58, 94, 0.3);
+        }
+
+        .breakdown-section li:last-child {
+            border-bottom: none;
+        }
+
+        .score-bar {
+            margin: 15px 0;
+        }
+
+        .score-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            color: #e8d5d0;
+            font-size: 1.1em;
+        }
+
+        .score-track {
+            width: 100%;
+            height: 25px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .score-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #8b3a5e, #d4737a);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 12px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: width 0.8s ease;
+        }
+
+        .cta-section {
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(139, 58, 94, 0.2);
+            border-radius: 12px;
+            border: 2px solid #8b3a5e;
+            text-align: center;
+        }
+
+        .cta-section h3 {
+            color: #d4737a;
+            font-size: 1.6em;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            color: #c9a89c;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #8b3a5e 0%, #d4737a 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .action-button {
+            padding: 12px 24px;
+            background: rgba(139, 58, 94, 0.3);
+            border: 1px solid #8b3a5e;
+            color: #e8d5d0;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .action-button:hover {
+            background: rgba(139, 58, 94, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to Home</a>
+
+        <div id="intro-screen">
+            <h1>The Mirror Quiz</h1>
+            <div class="intro">
+                <p>Your nervous system built defense patterns and relational strategies based on what hurt you. This quiz reveals your archetype.</p>
+            </div>
+
+            <div class="diagnostic-preview">
+                <p style="margin-bottom: 15px; color: #d4737a;"><strong>This quiz maps:</strong></p>
+                <div class="flag-item"><strong>Defense Masks:</strong> How you protect yourself</div>
+                <div class="flag-item"><strong>Offensive Patterns:</strong> How you engage in conflict</div>
+                <div class="flag-item"><strong>Your Archetype:</strong> Your unique combination</div>
+            </div>
+
+            <button class="start-button" onclick="startQuiz()">Discover Your Archetype</button>
+        </div>
+
+        <div id="quiz-screen" style="display: none;">
+            <div class="progress">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div id="questions-container"></div>
+            <div class="navigation">
+                <button id="prev-btn" onclick="previousQuestion()" disabled>Previous</button>
+                <button id="next-btn" onclick="nextQuestion()" disabled>Next</button>
+                <button id="submit-btn" onclick="calculateResults()" style="display: none;">See Your Archetype</button>
+            </div>
+        </div>
+
+        <div id="results-screen" class="results"></div>
+    </div>
+
+    <script>
+        var questions = [
+            {q: "When emotions hit, they completely overwhelm me and I can't think clearly.", c: "flooded"},
+            {q: "My feelings come out in bursts I can't control.", c: "flooded"},
+            {q: "People say I'm too emotional or too intense.", c: "flooded"},
+            {q: "I feel everything at maximum volume.", c: "flooded"},
+            {q: "I flood with feelings when triggered and can't calm down quickly.", c: "flooded"},
+            {q: "I keep people at a distance to protect myself.", c: "armored"},
+            {q: "Emotions feel dangerous so I shut them down.", c: "armored"},
+            {q: "Vulnerability feels like weakness.", c: "armored"},
+            {q: "I've built walls so high I sometimes can't feel anything.", c: "armored"},
+            {q: "Letting people in feels like giving them ammunition.", c: "armored"},
+            {q: "I change who I am depending on who I'm with.", c: "phantom"},
+            {q: "I mirror others so well I forget who I actually am.", c: "phantom"},
+            {q: "I disappear into what others need from me.", c: "phantom"},
+            {q: "I lose myself in relationships.", c: "phantom"},
+            {q: "My sense of self is unstable and shifts with whoever I'm around.", c: "phantom"},
+            {q: "I live in my head analyzing everything constantly.", c: "analyzer"},
+            {q: "I overthink instead of feeling.", c: "analyzer"},
+            {q: "Logic feels safer than emotions.", c: "analyzer"},
+            {q: "I observe my life from the outside rather than living it.", c: "analyzer"},
+            {q: "Thinking is my defense against feeling.", c: "analyzer"},
+            {q: "When someone pulls away, I chase harder.", c: "pursuer"},
+            {q: "I need constant reassurance or I panic.", c: "pursuer"},
+            {q: "Distance makes me pursue more intensely.", c: "pursuer"},
+            {q: "I can't let things go until we talk it through.", c: "pursuer"},
+            {q: "Silence from someone I care about feels unbearable.", c: "pursuer"},
+            {q: "When conflict starts, I shut down and pull away.", c: "withdrawer"},
+            {q: "I need space when things get intense.", c: "withdrawer"},
+            {q: "I go silent when overwhelmed.", c: "withdrawer"},
+            {q: "I avoid confrontation by withdrawing.", c: "withdrawer"},
+            {q: "Distance is my default when things get hard.", c: "withdrawer"},
+            {q: "I need to win arguments or I feel like I'm losing myself.", c: "competitor"},
+            {q: "Being wrong feels like being dominated.", c: "competitor"},
+            {q: "I fight to maintain control in relationships.", c: "competitor"},
+            {q: "I compete even with people I love.", c: "competitor"},
+            {q: "Admitting fault feels like surrender.", c: "competitor"},
+            {q: "I solve other people's problems to feel valuable.", c: "fixer"},
+            {q: "Helping others is how I earn love.", c: "fixer"},
+            {q: "I can't sit with someone's pain without trying to fix it.", c: "fixer"},
+            {q: "My worth comes from being needed.", c: "fixer"},
+            {q: "I overfunction for people who underfunction.", c: "fixer"}
+        ];
+
+        var currentQuestion = 0;
+        var answers = {};
+        var totalQuestions = questions.length;
+
+        function startQuiz() {
+            document.getElementById('intro-screen').style.display = 'none';
+            document.getElementById('quiz-screen').style.display = 'block';
+            renderQuestions();
+            showQuestion(0);
+        }
+
+        function renderQuestions() {
+            var container = document.getElementById('questions-container');
+            for (var i = 0; i < questions.length; i++) {
+                var div = document.createElement('div');
+                div.className = 'question-container';
+                div.id = 'question-' + i;
+                div.innerHTML = '<div class="question-number">Question ' + (i + 1) + ' of ' + totalQuestions + '</div>' +
+                    '<div class="question">' + questions[i].q + '</div>' +
+                    '<div class="options">' +
+                    '<div class="option" onclick="selectAnswer(' + i + ', 3, this)">Strongly Agree</div>' +
+                    '<div class="option" onclick="selectAnswer(' + i + ', 2, this)">Agree</div>' +
+                    '<div class="option" onclick="selectAnswer(' + i + ', 1, this)">Somewhat Agree</div>' +
+                    '<div class="option" onclick="selectAnswer(' + i + ', 0, this)">Disagree</div>' +
+                    '</div>';
+                container.appendChild(div);
+            }
+        }
+
+        function showQuestion(index) {
+            var all = document.querySelectorAll('.question-container');
+            for (var i = 0; i < all.length; i++) {
+                all[i].classList.remove('active');
+            }
+            document.getElementById('question-' + index).classList.add('active');
+            currentQuestion = index;
+            updateProgress();
+            updateNavButtons();
+        }
+
+        function selectAnswer(questionIndex, value, element) {
+            var container = element.parentElement.parentElement;
+            var options = container.querySelectorAll('.option');
+            for (var i = 0; i < options.length; i++) {
+                options[i].classList.remove('selected');
+            }
+            element.classList.add('selected');
+            answers[questionIndex] = {value: value, category: questions[questionIndex].c};
+            updateNavButtons();
+        }
+
+        function updateNavButtons() {
+            var prevBtn = document.getElementById('prev-btn');
+            var nextBtn = document.getElementById('next-btn');
+            var submitBtn = document.getElementById('submit-btn');
+            
+            prevBtn.disabled = currentQuestion === 0;
+            
+            if (currentQuestion === totalQuestions - 1) {
+                nextBtn.style.display = 'none';
+                submitBtn.style.display = answers[currentQuestion] ? 'block' : 'none';
+            } else {
+                nextBtn.style.display = 'block';
+                submitBtn.style.display = 'none';
+                nextBtn.disabled = !answers[currentQuestion];
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions - 1) {
+                showQuestion(currentQuestion + 1);
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                showQuestion(currentQuestion - 1);
+            }
+        }
+
+        function updateProgress() {
+            var progress = ((currentQuestion + 1) / totalQuestions) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+        }
+
+        function calculateResults() {
+            var scores = {
+                flooded: 0, armored: 0, phantom: 0, analyzer: 0,
+                pursuer: 0, withdrawer: 0, competitor: 0, fixer: 0
+            };
+
+            for (var key in answers) {
+                scores[answers[key].category] += answers[key].value;
+            }
+
+            var defenseMasks = ['flooded', 'armored', 'phantom', 'analyzer'];
+            var defenseScores = [];
+            for (var i = 0; i < defenseMasks.length; i++) {
+                defenseScores.push({mask: defenseMasks[i], score: scores[defenseMasks[i]]});
+            }
+            defenseScores.sort(function(a, b) { return b.score - a.score; });
+            var primaryDefense = defenseScores[0].mask;
+
+            var offensivePatterns = ['pursuer', 'withdrawer', 'competitor', 'fixer'];
+            var offensiveScores = [];
+            for (var i = 0; i < offensivePatterns.length; i++) {
+                offensiveScores.push({pattern: offensivePatterns[i], score: scores[offensivePatterns[i]]});
+            }
+            offensiveScores.sort(function(a, b) { return b.score - a.score; });
+            var primaryOffensive = offensiveScores[0].pattern;
+
+            displayResults(primaryDefense, primaryOffensive, scores);
+        }
+
+        function getArchetype(defense, offensive) {
+            var key = defense + '-' + offensive;
+            var archetypes = {
+                'flooded-pursuer': {name: 'The Hurricane', tagline: 'Emotional flooding meets desperate pursuit', core: 'You feel everything at maximum intensity and when someone pulls away, you chase with the full force of your panic.', wounds: 'Abandonment wound is primary.', patterns: ['You overwhelm people with emotional intensity while chasing them', 'Distance triggers panic that makes you flood and pursue harder'], healing: 'Learn to self-regulate your emotional flooding before pursuing.'},
+                'flooded-fixer': {name: 'The Savior', tagline: 'Drowning in others problems while your own feelings flood', core: 'You are emotionally flooded but you channel it into fixing everyone around you.', wounds: 'Abandonment + Erasure wounds.', patterns: ['You take on others emotions on top of your own flooding', 'Helping is how you earn the right to stay'], healing: 'Stop using fixing as a defense against your own flooding.'},
+                'phantom-pursuer': {name: 'The Shadow', tagline: 'Shapeshifts to chase loses self in pursuit', core: 'You become whoever you think will keep them close.', wounds: 'Abandonment + Erasure wounds.', patterns: ['You mirror and chase simultaneously', 'Distance triggers shapeshifting and pursuit'], healing: 'Stop shapeshifting to earn connection.'},
+                'analyzer-pursuer': {name: 'The Tracker', tagline: 'Obsessive mental surveillance masquerading as pursuit', core: 'You dont flood with emotion you flood with thoughts.', wounds: 'Abandonment wound channeled through intellectual defense.', patterns: ['You monitor and track instead of emotionally pursuing', 'Distance triggers obsessive analysis'], healing: 'Stop analyzing them and start feeling your own terror.'},
+                'armored-withdrawer': {name: 'The Fortress', tagline: 'Walls up emotionally absent classic avoidant', core: 'You built walls and you live behind them.', wounds: 'Exposure + Entrapment wounds.', patterns: ['You shut down when things get intense', 'Vulnerability is a threat you defend against'], healing: 'The walls that protected you are now your prison.'},
+                'analyzer-withdrawer': {name: 'The Investigator', tagline: 'Lives in head emotionally absent detached observer', core: 'You retreat into your mind when emotions come.', wounds: 'Exposure + Entrapment wounds routed through intellectual defense.', patterns: ['You dissect relationships instead of experiencing them', 'Emotional intensity triggers mental withdrawal'], healing: 'Come out of your head and into your body.'},
+                'phantom-withdrawer': {name: 'The Ghost', tagline: 'Disappears when vulnerable no stable self to show', core: 'You dont have a solid self to defend so when vulnerability comes you just vanish.', wounds: 'Erasure + Entrapment wounds.', patterns: ['You vanish when people get too close to the real you', 'Intimacy triggers disappearing'], healing: 'Build a self before trying to connect.'},
+                'armored-fixer': {name: 'The Guardian', tagline: 'Helps from behind walls cant receive', core: 'You help everyone but let no one in.', wounds: 'Exposure + Abandonment wounds.', patterns: ['You help but never let anyone help you', 'Fixing is how you connect without being vulnerable'], healing: 'Learn to receive.'},
+                'flooded-withdrawer': {name: 'The Reactor', tagline: 'Floods with emotion then vanishes', core: 'You flood then flee.', wounds: 'Fearful-avoidant pattern.', patterns: ['You flood emotionally then withdraw to cope', 'Intensity overwhelms you so you vanish'], healing: 'Learn to stay present with your feelings without fleeing.'},
+                'phantom-fixer': {name: 'The Chameleon', tagline: 'Classic fawn response shapeshifts to help', core: 'You become whatever is needed to be valuable.', wounds: 'Erasure wound dominant.', patterns: ['You morph into the perfect helper', 'Your identity is based on who needs what from you'], healing: 'Stop earning your existence through service.'},
+                'armored-competitor': {name: 'The Competitor', tagline: 'Narcissistic defense structure dominates to protect', core: 'You compete to stay on top armor yourself against vulnerability and dominate to avoid being controlled.', wounds: 'Exposure + Entrapment wounds.', patterns: ['You must win to feel safe', 'Vulnerability is weakness armor is strength'], healing: 'The armor and competition keep you isolated.'},
+                'flooded-competitor': {name: 'The Warrior', tagline: 'Fight response dominant emotional and aggressive', core: 'You feel intensely and you fight.', wounds: 'Exposure wound triggering fight response.', patterns: ['Your emotions come out as aggression', 'You flood and fight simultaneously'], healing: 'Your fighting is fear in disguise.'},
+                'analyzer-competitor': {name: 'The Strategist', tagline: 'Chess player calculated competition', core: 'You compete intellectually strategically coldly.', wounds: 'Entrapment + Exposure wounds.', patterns: ['You intellectualize competition', 'Relationships are strategic games'], healing: 'Not everything is a competition.'},
+                'phantom-competitor': {name: 'The Diplomat', tagline: 'Covert competition shapeshifts to win', core: 'You compete by becoming whatever wins.', wounds: 'Erasure + Entrapment wounds.', patterns: ['You compete covertly by shapeshifting', 'You morph to win without appearing competitive'], healing: 'Stop competing through shapeshifting.'},
+                'armored-pursuer': {name: 'The Controller', tagline: 'Dominating pursuit must have power', core: 'You pursue through control.', wounds: 'Abandonment + Entrapment wounds.', patterns: ['You pursue through dominance and control', 'Armored but demanding closeness'], healing: 'You cant control people into staying.'},
+                'analyzer-fixer': {name: 'The Detective', tagline: 'Intellectual helper solves you from a distance', core: 'You help by analyzing fix by intellectualizing.', wounds: 'Abandonment + Exposure wounds.', patterns: ['You help from your head never your heart', 'Solving problems is how you connect without feeling'], healing: 'People dont need solutions they need presence.'}
+            };
+            return archetypes[key] || {name: 'Unknown Archetype', tagline: 'Error', core: 'Contact support', wounds: '', patterns: [], healing: ''};
+        }
+
+        function displayResults(defense, offensive, scores) {
+            var archetype = getArchetype(defense, offensive);
+            var resultsScreen = document.getElementById('results-screen');
+            document.getElementById('quiz-screen').style.display = 'none';
+
+            var maxScore = 15;
+            var percentages = {};
+            for (var key in scores) {
+                percentages[key] = Math.round((scores[key] / maxScore) * 100);
+            }
+
+            var html = '<h2 style="color: #d4737a; text-align: center; margin-bottom: 30px;">Your Mirror Archetype</h2>' +
+                '<div class="archetype-name">' + archetype.name + '</div>' +
+                '<div class="archetype-tagline">' + archetype.tagline + '</div>' +
+                '<div class="archetype-card">' +
+                '<h3>Your Core Pattern</h3><p>' + archetype.core + '</p>' +
+                '<h3 style="margin-top: 25px;">Your Wound Structure</h3><p>' + archetype.wounds + '</p>' +
+                '</div>' +
+                '<div class="breakdown-section"><h4>How This Shows Up</h4><ul>';
+            
+            for (var i = 0; i < archetype.patterns.length; i++) {
+                html += '<li>' + archetype.patterns[i] + '</li>';
+            }
+            
+            html += '</ul></div>' +
+                '<div class="breakdown-section"><h4>Your Healing Path</h4>' +
+                '<p style="color: #c9a89c; line-height: 1.8;">' + archetype.healing + '</p></div>' +
+                '<div class="breakdown-section"><h4>Your Complete Score Breakdown</h4>' +
+                '<p style="color: #d4737a; margin: 20px 0 10px 0;"><strong>Defense Masks:</strong></p>';
+
+            var defenseList = ['flooded', 'armored', 'phantom', 'analyzer'];
+            for (var i = 0; i < defenseList.length; i++) {
+                var label = defenseList[i].charAt(0).toUpperCase() + defenseList[i].slice(1);
+                html += '<div class="score-bar"><div class="score-label"><span>' + label + '</span><span>' + percentages[defenseList[i]] + '%</span></div>' +
+                    '<div class="score-track"><div class="score-fill" style="width: ' + percentages[defenseList[i]] + '%">' + percentages[defenseList[i]] + '%</div></div></div>';
+            }
+
+            html += '<p style="color: #d4737a; margin: 30px 0 10px 0;"><strong>Offensive Patterns:</strong></p>';
+            
+            var offensiveList = ['pursuer', 'withdrawer', 'competitor', 'fixer'];
+            for (var i = 0; i < offensiveList.length; i++) {
+                var label = offensiveList[i].charAt(0).toUpperCase() + offensiveList[i].slice(1);
+                html += '<div class="score-bar"><div class="score-label"><span>' + label + '</span><span>' + percentages[offensiveList[i]] + '%</span></div>' +
+                    '<div class="score-track"><div class="score-fill" style="width: ' + percentages[offensiveList[i]] + '%">' + percentages[offensiveList[i]] + '%</div></div></div>';
+            }
+
+            html += '</div>' +
+                '<div class="cta-section">' +
+                '<h3>Get Your Personalized Healing Path</h3>' +
+                '<p>Get your archetype-specific workbook plus a 30-minute phone call to map your personalized healing path.</p>' +
+                '<a href="../booking.html" class="cta-button">Get Your Workbook + Call - $15</a>' +
+                '</div>' +
+                '<div class="action-buttons">' +
+                '<a href="../quizzes.html" class="action-button">Take Another Quiz</a>' +
+                '<a href="../programs.html" class="action-button">View Programs</a>' +
+                '<button class="action-button" onclick="location.reload()">Retake Quiz</button>' +
+                '</div>';
+
+            resultsScreen.innerHTML = html;
+            resultsScreen.classList.add('active');
+        }
+    </script>
+</body>
+</html>
