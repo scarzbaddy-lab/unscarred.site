@@ -1,3 +1,4 @@
 /quizzes /quiz 301
 /quizzes/ /quiz/ 301
+/quizzes/* /quiz/:splat 301
 /quizzes.html /quiz/ 301
