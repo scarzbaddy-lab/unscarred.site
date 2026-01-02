@@ -9,8 +9,12 @@ This repo is a plain HTML site. Every route is a folder with an `index.html`.
 Examples:
 
 - `/about/` → `about/index.html`
-- `/quizzes/nervous-system-response/` → `quizzes/nervous-system-response/index.html`
-- `/quizzes/are-they-hurting-me/` → `quizzes/are-they-hurting-me/index.html`
+- `/quiz/` → `quiz/index.html` (main quiz hub)
+- `/quiz/nervous-system-response/` → `quiz/nervous-system-response/index.html`
+- `/quiz/are-they-hurting-me/` → `quiz/are-they-hurting-me/index.html`
+- `/war/` → `war/index.html` (war room hub)
+
+Individual quizzes can also be flat HTML files: `/quiz/something.html` → `quiz/something.html`
 
 Netlify serves `index.html` automatically for each folder route.
 
@@ -38,8 +42,15 @@ Then open `http://localhost:8888`.
 
 ## Navigation rules
 
-- The header must always include an About link: `/about/`
-- Quizzes live under `/quizzes/`
+The header must always include these links in this order:
+1. **Quizzes** → `/quiz/`
+2. **War Room** → `/war/`
+3. **About** → `/about/`
+
+### Link hygiene
+- Use root absolute links only: `/about/` not `about/index.html` and not `../about/`
+- Never use `quizzes.html` in new code. Use `/quiz/`
+- Any "back to quizzes" link must point to `/quiz/`
 
 ## Netlify
 
