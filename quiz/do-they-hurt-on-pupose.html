@@ -480,6 +480,12 @@
 
         <div class="scores" id="scoreBreakdown"></div>
 
+        <div class="card" style="margin-top:14px;">
+          <h3>Next steps</h3>
+          <ul id="nextStepsList" style="margin:0;padding-left:20px;color:var(--text);font-size:14px;line-height:1.8;">
+          </ul>
+        </div>
+
         <div class="shareBox">
           <h3 class="metaTitle" style="margin:0 0 10px;">Share prompt</h3>
           <textarea id="shareText" readonly></textarea>
@@ -540,7 +546,13 @@
           happen: "They may be immature, stressed, or unskilled, but they can repair when confronted. The real question is consistency over time.",
           watch: "Look for follow through, not words. If repair only happens during fear of loss, it will become a cycle.",
           boundary: "I need the behavior to change, not just the conversation. If it repeats, we take a break and reset the terms.",
-          script: "I am not asking for perfection. I am asking for repair and consistent change. What will you do differently this week, specifically?"
+          script: "I am not asking for perfection. I am asking for repair and consistent change. What will you do differently this week, specifically?",
+          nextSteps: [
+            "Track the pattern for 2-4 weeks. Does the repair stick, or does it only happen during crisis?",
+            "Name specific behaviors you need to see change, not vague promises.",
+            "If the pattern repeats more than twice after clear communication, treat it as intentional.",
+            "Give them space to grow, but do not sacrifice your safety for their learning curve."
+          ]
         },
         confusedAvoidant: {
           title: "Avoidant Confusion And Emotional Evasion",
@@ -548,7 +560,13 @@
           happen: "They avoid discomfort by acting confused, vague, or overwhelmed. The harm comes from chronic non repair, not always from intent.",
           watch: "They debate reality, stall, or disappear when accountability is required. You end up carrying the emotional work alone.",
           boundary: "If we cannot talk with clarity and follow through, I will not continue building intimacy.",
-          script: "I need a clear answer. Do you understand what hurt me, and are you willing to change the behavior, yes or no?"
+          script: "I need a clear answer. Do you understand what hurt me, and are you willing to change the behavior, yes or no?",
+          nextSteps: [
+            "Stop over-explaining or trying to make them understand. Their confusion is a defense.",
+            "Set a time limit for resolution. If they need space, they give you a timeline and keep it.",
+            "Do not accept vague apologies or promises. You need concrete actions and accountability.",
+            "If they consistently avoid repair, pull back emotional investment until they show up differently."
+          ]
         },
         selfishDefensive: {
           title: "Self Protective Deflection",
@@ -556,7 +574,13 @@
           happen: "They prioritize being right, saving face, or avoiding shame. The harm is real because your needs are treated like threats.",
           watch: "They flip it back on you, attack your tone, or make your pain the problem. You start editing yourself to keep peace.",
           boundary: "I will not stay in conversations where my feelings are punished. We pause if you deflect or attack.",
-          script: "We can talk about tone later. Right now, stay on the issue. What part of what I said are you willing to own?"
+          script: "We can talk about tone later. Right now, stay on the issue. What part of what I said are you willing to own?",
+          nextSteps: [
+            "Do not engage when they flip it. Pause the conversation and return only if they stay on topic.",
+            "Stop softening your words to avoid their defensiveness. You are not responsible for managing their shame.",
+            "Watch for performative apologies that blame stress or childhood but lead to no real change.",
+            "If they consistently prioritize being right over your wellbeing, the relationship is not safe for vulnerability."
+          ]
         },
         powerHarm: {
           title: "Power Pattern",
@@ -564,7 +588,13 @@
           happen: "The pattern looks like control. Punishment, minimization, using your soft spots, and repeating the harm despite clear communication.",
           watch: "You feel unsafe to speak. The behavior escalates when you gain clarity, set boundaries, or ask for accountability.",
           boundary: "I am not available for punishment, intimidation, or emotional manipulation. If it happens again, I exit the dynamic.",
-          script: "I will not stay in this if my pain is mocked, minimized, or punished. If you want access to me, accountability is required."
+          script: "I will not stay in this if my pain is mocked, minimized, or punished. If you want access to me, accountability is required.",
+          nextSteps: [
+            "Prioritize your safety. Document incidents. Reach out to support systems quietly if needed.",
+            "Do not announce boundaries, just enforce them. Remove access, reduce contact, create distance.",
+            "Stop trying to make them see your pain. They see it. The pattern is the point.",
+            "Seek professional support familiar with coercive control and power dynamics, not general couples therapy."
+          ]
         }
       }
     };
@@ -586,6 +616,7 @@
     const boundaryText = document.getElementById("boundaryText");
     const scriptText = document.getElementById("scriptText");
     const scoreBreakdown = document.getElementById("scoreBreakdown");
+    const nextStepsList = document.getElementById("nextStepsList");
     const shareText = document.getElementById("shareText");
 
     const scoreBtn = document.getElementById("scoreBtn");
@@ -817,6 +848,17 @@
       scoreBreakdown.appendChild(scoreRow("Repeat cycle", s.repeat));
       scoreBreakdown.appendChild(scoreRow("Confusion or evasion", s.confusion));
       scoreBreakdown.appendChild(scoreRow("Self loss feeling", s.selfLoss));
+
+      // Populate next steps
+      nextStepsList.innerHTML = "";
+      if (res.nextSteps && res.nextSteps.length > 0) {
+        res.nextSteps.forEach(step => {
+          const li = document.createElement("li");
+          li.textContent = step;
+          li.style.marginBottom = "8px";
+          nextStepsList.appendChild(li);
+        });
+      }
 
       const share = [
         "My result: " + res.title,
