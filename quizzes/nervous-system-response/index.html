@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nervous System Response Scan | Unscarred</title>
+  <meta name="description" content="Assess fight, flight, freeze, fawn, and faint. Get percentages, fast regulation tools, and repair scripts." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#050507;
+      --bg2:#0a0a0f;
+      --text:#f5f5f7;
+      --muted:#b8b8c4;
+      --border:rgba(255,255,255,0.10);
+      --accent:#a33b5c;
+      --shadow:0 18px 60px rgba(0,0,0,0.55);
+      --shadow2:0 10px 30px rgba(0,0,0,0.4);
+      --radius:22px;
+      --max:980px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      color:var(--text);
+      font-family:"Outfit",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(900px 500px at 18% 8%, rgba(163,59,92,0.18), transparent 55%),
+        radial-gradient(900px 500px at 85% 16%, rgba(255,255,255,0.06), transparent 55%),
+        radial-gradient(700px 500px at 30% 92%, rgba(163,59,92,0.10), transparent 55%),
+        linear-gradient(180deg,var(--bg),var(--bg2));
+      min-height:100vh;
+    }
+    a{color:inherit;text-decoration:none}
+    .siteHeader{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:blur(10px);
+      background:rgba(5,5,7,0.72);
+      border-bottom:1px solid var(--border);
+    }
+    .navInner{
+      max-width:var(--max);margin:0 auto;padding:12px 18px;
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+    }
+    .brand{display:inline-flex;align-items:center;gap:10px;font-weight:700;letter-spacing:0.02em}
+    .dot{width:10px;height:10px;border-radius:999px;background:var(--accent);box-shadow:0 0 0 4px rgba(163,59,92,0.18)}
+    .navLinks{display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:flex-end}
+    .navLinks a{
+      padding:8px 10px;border-radius:999px;border:1px solid transparent;
+      color:rgba(245,245,247,0.88);font-size:14px;
+    }
+    .navLinks a:hover{border-color:rgba(255,255,255,0.14);background:rgba(255,255,255,0.03)}
+    .navLinks a.active{border-color:rgba(163,59,92,0.45);background:rgba(163,59,92,0.10);color:#fff}
+
+    .wrap{width:100%;margin:0 auto;padding:22px 18px 72px}
+    .container{max-width:var(--max);margin:0 auto}
+    .hero{
+      padding:28px 22px;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(18,18,24,0.78), rgba(10,10,15,0.55));
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";position:absolute;inset:-120px -120px auto auto;width:420px;height:420px;
+      background:radial-gradient(circle at 30% 30%, rgba(163,59,92,0.28), transparent 55%);
+      pointer-events:none;
+    }
+    h1{
+      margin:12px 0 10px;
+      font-family:"Cormorant Garamond",serif;
+      font-weight:700;
+      letter-spacing:0.01em;
+      font-size:clamp(34px,5vw,54px);
+      line-height:1.02;
+    }
+    .sub{margin:0;color:var(--muted);font-size:16px;line-height:1.65;max-width:74ch}
+    .navRow{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
+    .btn{
+      appearance:none;
+      border:1px solid rgba(163,59,92,0.55);
+      background:linear-gradient(180deg, rgba(163,59,92,0.95), rgba(163,59,92,0.72));
+      color:#fff;
+      padding:12px 16px;
+      border-radius:14px;
+      font-weight:700;
+      letter-spacing:0.04em;
+      text-transform:uppercase;
+      font-size:12px;
+      cursor:pointer;
+      box-shadow:0 14px 40px rgba(163,59,92,0.22);
+      text-decoration:none;
+      display:inline-flex;align-items:center;justify-content:center;
+    }
+    .btn.secondary{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.03);
+      color:var(--text);
+      box-shadow:none;
+    }
+
+    .quiz{
+      margin-top:18px;
+      padding:18px;
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:linear-gradient(180deg, rgba(18,18,24,0.70), rgba(10,10,15,0.55));
+      box-shadow:var(--shadow2);
+    }
+    .q{padding:14px 12px;border-radius:16px;border:1px solid rgba(255,255,255,0.09);background:rgba(255,255,255,0.02);margin-bottom:12px}
+    .qTop{display:flex;gap:10px;align-items:baseline}
+    .qNum{color:var(--muted);font-size:12px;letter-spacing:0.10em;text-transform:uppercase;min-width:104px}
+    .qText{flex:1;font-size:15px;line-height:1.5}
+    .choices{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+    .choice{display:flex;align-items:center;justify-content:center;padding:10px;border-radius:14px;border:1px solid rgba(255,255,255,0.10);background:rgba(255,255,255,0.02);cursor:pointer;user-select:none;text-align:center;font-size:13px;color:var(--text);min-height:44px}
+    .choice input{display:none}
+    .choice.selected{border-color:rgba(163,59,92,0.75);background:rgba(163,59,92,0.10);box-shadow:0 14px 34px rgba(163,59,92,0.14)}
+    .footerRow{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+    .note{margin:0;color:var(--muted);font-size:13px;line-height:1.6}
+    .error{display:none;margin:12px 0 0;padding:12px;border-radius:14px;border:1px solid rgba(163,59,92,0.45);background:rgba(163,59,92,0.10);font-size:13px;line-height:1.5}
+
+    .results{display:none;margin-top:18px;padding:18px;border-radius:var(--radius);border:1px solid rgba(255,255,255,0.10);background:linear-gradient(180deg, rgba(18,18,24,0.82), rgba(10,10,15,0.60));box-shadow:var(--shadow)}
+    .kicker{font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+    .resultTitle{margin:0 0 10px;font-family:"Cormorant Garamond",serif;font-weight:700;font-size:clamp(26px,3.4vw,38px);line-height:1.06}
+    .tag{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 12px;border-radius:999px;border:1px solid rgba(163,59,92,0.45);background:rgba(163,59,92,0.10);font-size:13px;margin-top:10px}
+    .tag b{color:#fff}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+    .card{border:1px solid rgba(255,255,255,0.09);background:rgba(255,255,255,0.02);border-radius:18px;padding:14px}
+    .card h3{margin:0 0 10px;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+    .card p, .card li{margin:0;color:var(--text);font-size:14px;line-height:1.65}
+    .card ul{margin:0;padding-left:18px;display:grid;gap:10px}
+    .barWrap{margin-top:10px;display:grid;gap:10px}
+    .barRow{display:grid;grid-template-columns:120px 1fr 58px;gap:10px;align-items:center}
+    .barName{color:rgba(245,245,247,0.86);font-size:13px}
+    .barOuter{height:10px;border-radius:999px;background:rgba(255,255,255,0.08);overflow:hidden;border:1px solid rgba(255,255,255,0.08)}
+    .barInner{height:100%;border-radius:999px;background:rgba(163,59,92,0.85);width:0%}
+    .barPct{color:rgba(245,245,247,0.78);font-size:13px;text-align:right}
+    footer{margin-top:24px;border-top:1px solid rgba(255,255,255,0.10);padding-top:18px;color:rgba(245,245,247,0.75);font-size:13px;line-height:1.6}
+    footer a{color:rgba(245,245,247,0.85);text-decoration:underline;text-underline-offset:2px}
+    @media(max-width:840px){.choices{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.barRow{grid-template-columns:90px 1fr 54px}}
+  </style>
+</head>
+
+<body>
+  <header class="siteHeader" role="banner">
+    <div class="navInner">
+      <a class="brand" href="/" aria-label="Unscarred home"><span class="dot" aria-hidden="true"></span><span>Unscarred</span></a>
+      <nav class="navLinks" aria-label="Primary">
+        <a href="/">Home</a>
+        <a class="active" href="/quizzes/">Quizzes</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="container">
+      <section class="hero" id="top">
+        <h1>Nervous System Response Scan</h1>
+        <p class="sub">
+          This maps how your body protects you under stress.
+          It is not a diagnosis.
+          Answer based on your most intense recent relationship dynamic.
+        </p>
+        <div class="navRow">
+          <a class="btn secondary" href="/quizzes/">Back to quizzes</a>
+          <a class="btn secondary" href="/about/">About Unscarred</a>
+          <a class="btn secondary" href="/quizzes/are-they-hurting-me/">Are they hurting me</a>
+        </div>
+      </section>
+
+      <section class="quiz" id="quiz">
+        <div id="questions"></div>
+
+        <div class="footerRow">
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+            <button class="btn" id="scoreBtn" type="button">See my results</button>
+            <button class="btn secondary" id="resetBtn" type="button">Reset</button>
+          </div>
+          <p class="note">Pick the answer that is most true when you are activated.</p>
+        </div>
+
+        <div class="error" id="errorBox" role="alert"></div>
+      </section>
+
+      <section class="results" id="results">
+        <p class="kicker">Your results</p>
+        <h2 class="resultTitle" id="title">Your Response Profile</h2>
+
+        <div class="tag" id="tagLine"></div>
+
+        <div class="card" style="margin-top:14px;">
+          <h3>Percentages</h3>
+          <div class="barWrap" id="bars"></div>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h3>Primary response</h3>
+            <p id="primaryText"></p>
+          </div>
+          <div class="card">
+            <h3>Secondary response</h3>
+            <p id="secondaryText"></p>
+          </div>
+          <div class="card">
+            <h3>Fast regulation tools</h3>
+            <ul id="toolsList"></ul>
+          </div>
+          <div class="card">
+            <h3>Repair script</h3>
+            <p id="scriptText"></p>
+          </div>
+        </div>
+
+        <div class="navRow" style="margin-top:14px;">
+          <a class="btn secondary" href="/quizzes/partner-draw/">Partner Draw</a>
+          <a class="btn secondary" href="/quizzes/ego-structure/">Ego Structure</a>
+          <a class="btn secondary" href="/quizzes/relational-needs/">Relational Needs</a>
+          <button class="btn" id="backBtn" type="button">Back to scan</button>
+        </div>
+      </section>
+
+      <footer>
+        <p>© 2026 Unscarred. Pattern education, not diagnosis.</p>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "unscarred_nervous_system_response_v1";
+
+    const SCALE = ["Never", "Sometimes", "Often", "Almost always"];
+
+    const RESPONSES = {
+      fight: {
+        title: "Fight",
+        what: "Intensity, urgency, and control when you feel threatened.",
+        protecting: "Safety, dignity, control, or not being minimized.",
+        tools: [
+          "Drop your shoulders, unclench your jaw, slow your voice on purpose.",
+          "Name the goal: 'I want repair, not a win.'",
+          "Take a 90 second pause before you text or talk again."
+        ],
+        script: "I am activated and my tone is getting sharp. I want to repair, not escalate. Can we slow down and talk in two clear sentences each?"
+      },
+      flight: {
+        title: "Flight",
+        what: "Overthinking, fixing, busy energy, and trying to outrun the feeling.",
+        protecting: "Certainty, stability, and avoiding rejection or chaos.",
+        tools: [
+          "One long exhale, then another. Move slower than your thoughts.",
+          "Write the facts only: what happened, what was said, what is unknown.",
+          "Pick one question and ask it. No stacking."
+        ],
+        script: "I am spiraling and trying to solve everything at once. I need one clear answer: are we good, and when can we talk calmly?"
+      },
+      freeze: {
+        title: "Freeze",
+        what: "Shut down, blank mind, numbness, or feeling stuck.",
+        protecting: "Overwhelm, conflict, and the fear of doing it wrong.",
+        tools: [
+          "Warm your body: sip something warm, hold a mug, or press feet into the floor.",
+          "Say one true sentence: 'I need a minute to come back online.'",
+          "Set a time: 'I can talk in 30 minutes.'"
+        ],
+        script: "I am shutting down and I cannot think clearly. I do want to talk. I need 30 minutes to regulate, then I can come back and try again."
+      },
+      fawn: {
+        title: "Fawn",
+        what: "People pleasing, apologizing, shrinking, and caretaking to stay safe.",
+        protecting: "Connection, approval, and preventing anger or abandonment.",
+        tools: [
+          "Put a hand on your chest and ask: what do I actually want right now?",
+          "Practice a soft no: 'I cannot do that.'",
+          "Delay agreement: 'Let me think and get back to you.'"
+        ],
+        script: "I notice I am agreeing to keep the peace. I need to be honest. What I can do is X. What I cannot do is Y."
+      },
+      faint: {
+        title: "Faint",
+        what: "Collapse, hopelessness, giving up, and going emotionally offline.",
+        protecting: "Pain overload, powerlessness, and exhaustion from chronic stress.",
+        tools: [
+          "Tiny action: stand up, drink water, or step outside for 60 seconds.",
+          "Text a single anchor: one safe person, one sentence.",
+          "Lower the bar: today is about stabilization, not solutions."
+        ],
+        script: "I am in collapse mode and I cannot do this conversation right now. I need a break to stabilize. I will reconnect when I can stay present."
+      }
+    };
+
+    const QUESTIONS = [
+      // Fight
+      { id: 1,  text: "When I feel disrespected, my tone gets sharp fast.", type: "fight" },
+      { id: 2,  text: "I interrupt, correct, or push hard because I need it solved now.", type: "fight" },
+      { id: 3,  text: "I feel a rush to prove my point or defend myself.", type: "fight" },
+      { id: 4,  text: "I get controlling when things feel uncertain.", type: "fight" },
+      { id: 5,  text: "I regret my intensity later but it feels automatic in the moment.", type: "fight" },
+
+      // Flight
+      { id: 6,  text: "I spiral in my mind and replay conversations for hours.", type: "flight" },
+      { id: 7,  text: "I obsess over what they meant and what I should do next.", type: "flight" },
+      { id: 8,  text: "I over-text, over-explain, or chase clarity when I am anxious.", type: "flight" },
+      { id: 9,  text: "I stay busy or productive to avoid feeling what I feel.", type: "flight" },
+      { id: 10, text: "Uncertainty makes me restless and I need to take action.", type: "flight" },
+
+      // Freeze
+      { id: 11, text: "In conflict I go blank and cannot find words.", type: "freeze" },
+      { id: 12, text: "I shut down and feel numb or detached.", type: "freeze" },
+      { id: 13, text: "I avoid responding because I feel overwhelmed.", type: "freeze" },
+      { id: 14, text: "Even small decisions feel hard when I am stressed.", type: "freeze" },
+      { id: 15, text: "I feel stuck, like I cannot move or speak.", type: "freeze" },
+
+      // Fawn
+      { id: 16, text: "I apologize quickly to keep the peace, even when I am not wrong.", type: "fawn" },
+      { id: 17, text: "I focus on their feelings more than mine during conflict.", type: "fawn" },
+      { id: 18, text: "I say yes and then resent it later.", type: "fawn" },
+      { id: 19, text: "I shrink my needs because I fear their reaction.", type: "fawn" },
+      { id: 20, text: "I try to fix their mood so I can feel safe.", type: "fawn" },
+
+      // Faint
+      { id: 21, text: "When things get hard, I feel like giving up completely.", type: "faint" },
+      { id: 22, text: "I go emotionally offline and stop caring, even if I love them.", type: "faint" },
+      { id: 23, text: "I feel heavy, exhausted, or hopeless when conflict repeats.", type: "faint" },
+      { id: 24, text: "I isolate and disappear because I cannot carry it anymore.", type: "faint" },
+      { id: 25, text: "I stop trying to communicate because it feels pointless.", type: "faint" },
+    ];
+
+    const state = { answers: Array(QUESTIONS.length).fill(null) };
+
+    const elQ = document.getElementById("questions");
+    const errorBox = document.getElementById("errorBox");
+    const scoreBtn = document.getElementById("scoreBtn");
+    const resetBtn = document.getElementById("resetBtn");
+    const results = document.getElementById("results");
+    const quiz = document.getElementById("quiz");
+    const backBtn = document.getElementById("backBtn");
+
+    const tagLine = document.getElementById("tagLine");
+    const bars = document.getElementById("bars");
+    const primaryText = document.getElementById("primaryText");
+    const secondaryText = document.getElementById("secondaryText");
+    const scriptText = document.getElementById("scriptText");
+    const toolsList = document.getElementById("toolsList");
+
+    function save() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state.answers)); } catch (e) {} }
+    function load() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const arr = JSON.parse(raw);
+        if (Array.isArray(arr) && arr.length === state.answers.length) state.answers = arr;
+      } catch (e) {}
+    }
+
+    function showError(msg) { errorBox.style.display = "block"; errorBox.textContent = msg; }
+    function hideError() { errorBox.style.display = "none"; errorBox.textContent = ""; }
+
+    function ensureComplete() {
+      const miss = [];
+      state.answers.forEach((v,i) => { if (v === null) miss.push(i + 1); });
+      if (!miss.length) return true;
+      showError("Answer all questions first. You missed question " + miss[0] + ".");
+      const node = document.querySelector('.q[data-index="' + (miss[0] - 1) + '"]');
+      if (node) node.scrollIntoView({ behavior: "smooth", block: "center" });
+      return false;
+    }
+
+    function renderQuestions() {
+      elQ.innerHTML = "";
+      QUESTIONS.forEach((q, i) => {
+        const wrap = document.createElement("div");
+        wrap.className = "q";
+        wrap.setAttribute("data-index", String(i));
+
+        const top = document.createElement("div");
+        top.className = "qTop";
+
+        const num = document.createElement("div");
+        num.className = "qNum";
+        num.textContent = "Question " + (i + 1);
+
+        const text = document.createElement("div");
+        text.className = "qText";
+        text.textContent = q.text;
+
+        top.appendChild(num);
+        top.appendChild(text);
+        wrap.appendChild(top);
+
+        const choices = document.createElement("div");
+        choices.className = "choices";
+
+        SCALE.forEach((label, v) => {
+          const lab = document.createElement("label");
+          lab.className = "choice";
+
+          const input = document.createElement("input");
+          input.type = "radio";
+          input.name = "q_" + i;
+          input.value = String(v);
+          input.checked = state.answers[i] === v;
+
+          const span = document.createElement("span");
+          span.textContent = label;
+
+          lab.appendChild(input);
+          lab.appendChild(span);
+
+          if (input.checked) lab.classList.add("selected");
+
+          lab.addEventListener("click", () => {
+            state.answers[i] = v;
+            save();
+            hideError();
+            choices.querySelectorAll(".choice").forEach(x => x.classList.remove("selected"));
+            lab.classList.add("selected");
+          });
+
+          choices.appendChild(lab);
+        });
+
+        wrap.appendChild(choices);
+        elQ.appendChild(wrap);
+      });
+    }
+
+    function compute() {
+      const counts = { fight:0, flight:0, freeze:0, fawn:0, faint:0 };
+      const max = { fight:0, flight:0, freeze:0, fawn:0, faint:0 };
+
+      QUESTIONS.forEach((q, i) => {
+        const v = state.answers[i] ?? 0;
+        counts[q.type] += v;
+        max[q.type] += 3;
+      });
+
+      const perc = Object.fromEntries(Object.keys(counts).map(k => {
+        const p = max[k] ? Math.round((counts[k] / max[k]) * 100) : 0;
+        return [k, p];
+      }));
+
+      const sorted = Object.entries(perc)
+        .map(([k,p]) => ({ key:k, pct:p, ...RESPONSES[k] }))
+        .sort((a,b) => b.pct - a.pct);
+
+      return { perc, primary: sorted[0], secondary: sorted[1], sorted };
+    }
+
+    function renderBars(sorted) {
+      bars.innerHTML = "";
+      sorted.forEach(item => {
+        const row = document.createElement("div");
+        row.className = "barRow";
+
+        const name = document.createElement("div");
+        name.className = "barName";
+        name.textContent = item.title;
+
+        const outer = document.createElement("div");
+        outer.className = "barOuter";
+
+        const inner = document.createElement("div");
+        inner.className = "barInner";
+        inner.style.width = item.pct + "%";
+        outer.appendChild(inner);
+
+        const pct = document.createElement("div");
+        pct.className = "barPct";
+        pct.textContent = item.pct + "%";
+
+        row.appendChild(name);
+        row.appendChild(outer);
+        row.appendChild(pct);
+        bars.appendChild(row);
+      });
+    }
+
+    function renderResults() {
+      const out = compute();
+      tagLine.innerHTML = `<b>Primary:</b> <span>${escapeHtml(out.primary.title)}</span> <b>Secondary:</b> <span>${escapeHtml(out.secondary.title)}</span>`;
+
+      renderBars(out.sorted);
+
+      primaryText.textContent = out.primary.what + " What it is protecting: " + out.primary.protecting;
+      secondaryText.textContent = out.secondary.what + " What it is protecting: " + out.secondary.protecting;
+
+      toolsList.innerHTML = "";
+      const tools = [...out.primary.tools.slice(0,2), ...out.secondary.tools.slice(0,1)];
+      tools.forEach(t => {
+        const li = document.createElement("li");
+        li.textContent = t;
+        toolsList.appendChild(li);
+      });
+
+      scriptText.textContent = out.primary.script;
+
+      results.style.display = "block";
+      quiz.style.display = "none";
+      window.scrollTo({ top: document.getElementById("top").offsetTop, behavior: "smooth" });
+    }
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, s => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      }[s]));
+    }
+
+    function resetAll() {
+      state.answers = Array(QUESTIONS.length).fill(null);
+      try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+      results.style.display = "none";
+      quiz.style.display = "block";
+      hideError();
+      renderQuestions();
+      window.scrollTo({ top: document.getElementById("top").offsetTop, behavior: "smooth" });
+    }
+
+    scoreBtn.addEventListener("click", () => { hideError(); if (!ensureComplete()) return; renderResults(); });
+    resetBtn.addEventListener("click", resetAll);
+    backBtn.addEventListener("click", () => {
+      results.style.display = "none";
+      quiz.style.display = "block";
+      window.scrollTo({ top: document.getElementById("quiz").offsetTop - 8, behavior: "smooth" });
+    });
+
+    load();
+    renderQuestions();
+  </script>
+</body>
+</html>

@@ -18,25 +18,42 @@
     .logo{font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--text-main);text-decoration:none}
     .logo span{color:var(--primary)}
     nav a{font-size:14px;color:var(--text-soft);text-decoration:none;margin-left:32px}
+    nav a:hover{color:var(--text-main)}
+    nav a.active{color:var(--text-main)}
     .hero{padding:160px 0 60px;text-align:center}
     .hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:.7rem;font-weight:600;text-transform:uppercase;color:var(--accent);padding:8px 16px;border-radius:999px;margin-bottom:24px}
+    h1{font-family:var(--font-display);font-size:3.5rem;font-weight:600;margin-bottom:20px}
+    .hero-sub{max-width:640px;margin:0 auto;font-size:1.1rem;color:var(--text-soft);line-height:1.6}
     .featured-quiz{background:linear-gradient(165deg, rgba(163,59,92,0.15), rgba(12,11,16,0.95));border:2px solid rgba(163,59,92,0.3);border-radius:24px;padding:48px;margin:48px 0;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;text-decoration:none}
+    .featured-quiz:hover{border-color:rgba(163,59,92,0.45);transform:translateY(-2px)}
+    .featured-quiz__badge{display:inline-block;background:rgba(201,118,61,0.15);color:var(--accent);font-size:.7rem;font-weight:600;text-transform:uppercase;padding:6px 14px;border-radius:999px;margin-bottom:14px}
+    .featured-quiz h2{font-family:var(--font-display);font-size:2rem;font-weight:600;margin-bottom:12px}
+    .featured-quiz p{color:var(--text-soft);line-height:1.6;margin-bottom:18px}
     .featured-btn{display:inline-block;padding:16px 36px;background:linear-gradient(135deg,var(--primary),#8a2a4a);color:#fff;text-decoration:none;border-radius:999px;font-size:.9rem;font-weight:600}
     .category-label{font-size:.7rem;font-weight:600;text-transform:uppercase;color:var(--accent);margin:60px 0 24px;padding-top:40px;border-top:1px solid var(--border-glass)}
     .quiz-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-    .quiz-card{background:linear-gradient(165deg, rgba(20,18,25,0.9), rgba(12,11,16,0.95));border:1px solid var(--border-glass);border-radius:var(--radius-lg);padding:28px;text-decoration:none;display:block}
-    .quiz-card:hover{transform:translateY(-4px)}
+    .quiz-card{background:linear-gradient(165deg, rgba(20,18,25,0.9), rgba(12,11,16,0.95));border:1px solid var(--border-glass);border-radius:var(--radius-lg);padding:28px;text-decoration:none;display:block;transition:all 0.2s ease}
+    .quiz-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,0.10)}
     .quiz-card__icon{font-size:2.5rem;margin-bottom:16px}
     .quiz-card h3{font-family:var(--font-display);font-size:1.2rem;font-weight:600;color:var(--text-main);margin-bottom:8px}
+    .quiz-card p{color:var(--text-soft);line-height:1.55;margin-bottom:12px;font-size:.95rem}
+    .quiz-card__meta{font-size:.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.06em}
     .cta-section{background:linear-gradient(165deg, rgba(124,92,191,0.1), rgba(12,11,16,0.95));border:1px solid rgba(124,92,191,0.2);border-radius:24px;padding:60px;text-align:center;margin:80px 0 60px}
+    .cta-section h2{font-family:var(--font-display);font-size:2.1rem;margin-bottom:12px}
+    .cta-section p{max-width:650px;margin:0 auto 24px;color:var(--text-soft);line-height:1.6}
+    footer{padding:30px 0;border-top:1px solid var(--border-glass);color:var(--text-soft)}
+    footer a{color:var(--text-soft)}
+    footer a:hover{color:var(--text-main)}
+    @media(max-width:900px){.featured-quiz{grid-template-columns:1fr;gap:24px}.quiz-grid{grid-template-columns:1fr}.hero{padding:140px 0 40px}h1{font-size:2.6rem}nav a{margin-left:18px}}
   </style>
 </head>
 <body>
   <header>
     <div class="header-inner container">
-      <a href="/index.html" class="logo">un<span>scarred</span></a>
+      <a href="/" class="logo">un<span>scarred</span></a>
       <nav>
-        <a href="/quizzes/">Quizzes</a>
+        <a class="active" href="/quizzes/">Quizzes</a>
+        <a href="/about/">About</a>
         <a href="/programs.html">Programs</a>
         <a href="/services.html">Services</a>
         <a href="/blog.html">Blog</a>
@@ -107,7 +124,7 @@
 
   <footer>
     <div class="container">
-      <p>© 2025 Unscarred. <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
+      <p>© 2026 Unscarred. <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
     </div>
   </footer>
 

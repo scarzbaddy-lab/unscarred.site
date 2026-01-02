@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Are They Hurting Me? | Unscarred</title>
+    <meta name="description" content="Take this honest assessment to understand your relationship dynamics. Free quiz reveals what you might be missing about yourself and your partner.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #f8f9fa;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+
+        .quiz-section {
+            display: none;
+        }
+
+        .quiz-section.active {
+            display: block;
+        }
+
+        .question {
+            margin-bottom: 40px;
+        }
+
+        .question-number {
+            font-size: 0.9rem;
+            color: #999;
+            margin-bottom: 8px;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            font-weight: 500;
+        }
+
+        .answer-option {
+            display: block;
+            padding: 15px;
+            margin-bottom: 12px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .answer-option:hover {
+            border-color: #2c3e50;
+            background: #f1f3f5;
+        }
+
+        .answer-option input[type="radio"] {
+            margin-right: 12px;
+            cursor: pointer;
+        }
+
+        .answer-option label {
+            cursor: pointer;
+            display: inline;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .btn-secondary {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .btn-secondary:hover {
+            background: #dee2e6;
+        }
+
+        .btn-primary {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #34495e;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #e9ecef;
+            margin-bottom: 30px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #2c3e50;
+            transition: width 0.3s;
+        }
+
+        .result-page {
+            display: none;
+        }
+
+        .result-page.active {
+            display: block;
+        }
+
+        .result-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .result-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .result-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .result-content {
+            line-height: 1.8;
+        }
+
+        .result-content h3 {
+            font-size: 1.3rem;
+            margin: 30px 0 15px 0;
+            color: #1a1a1a;
+        }
+
+        .result-content h4 {
+            font-size: 1.1rem;
+            margin: 20px 0 10px 0;
+            color: #2c3e50;
+        }
+
+        .result-content p {
+            margin-bottom: 20px;
+        }
+
+        .result-content ul {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+
+        .result-content li {
+            margin-bottom: 10px;
+        }
+
+        .result-content strong {
+            color: #2c3e50;
+        }
+
+        .arrow {
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #2c3e50;
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            margin-top: 30px;
+            transition: background 0.2s;
+        }
+
+        .cta-button:hover {
+            background: #34495e;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    
+        .result-actions {
+            margin-top: 30px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-link {
+            background: transparent;
+            color: #2c3e50;
+            border: 2px solid #e9ecef;
+        }
+
+        .btn-link:hover {
+            background: #f1f3f5;
+            border-color: #2c3e50;
+        }
+
+        details.score-details {
+            margin-top: 20px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 14px 16px;
+        }
+
+        details.score-details summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .score-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .score-pill {
+            padding: 10px 12px;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+        }
+
+        .score-pill strong {
+            display: block;
+            font-size: 0.9rem;
+            color: #2c3e50;
+        }
+
+        .score-pill span {
+            font-size: 0.95rem;
+            color: #1a1a1a;
+        }
+
+    
+        /* Unscarred site header */
+        .siteHeader{
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.85);
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+        .navInner{
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        .brand{
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            text-transform: lowercase;
+            letter-spacing: 0.5px;
+            color: #1a1a1a;
+        }
+        .dot{
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: #d6336c;
+            box-shadow: 0 0 0 4px rgba(214,51,108,0.12);
+        }
+        .navLinks{
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        .navLinks a{
+            padding: 8px 10px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            color: rgba(0,0,0,0.72);
+            font-size: 14px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .navLinks a:hover{
+            border-color: rgba(0,0,0,0.10);
+            background: rgba(0,0,0,0.03);
+        }
+        .navLinks a.active{
+            border-color: rgba(214,51,108,0.35);
+            background: rgba(214,51,108,0.08);
+            color: #111;
+        }
+
+</style>
+</head>
+
+<body>
+    <header class="siteHeader" role="banner">
+        <div class="navInner">
+            <a class="brand" href="/" aria-label="Unscarred home"><span class="dot" aria-hidden="true"></span><span>unscarred</span></a>
+            <nav class="navLinks" aria-label="Primary">
+                <a href="/">Home</a>
+                <a href="/quizzes/">Quizzes</a>
+                <a href="/about/">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container" id="quiz">
+        <!-- Quiz Header -->
+        <div id="quizHeader">
+            <h1>Is My Partner a Narcissist?</h1>
+            <p class="subtitle">This assessment reveals what you might be missing about your relationship dynamics, including patterns you're bringing to the table.</p>
+        </div>
+
+        <!-- Quiz Section -->
+        <div id="quizSection" class="quiz-section active">
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+            </div>
+            
+            <div id="questionsContainer"></div>
+
+            <div class="navigation">
+                <button class="btn btn-secondary" id="prevBtn" onclick="previousQuestion()" disabled>Previous</button>
+                <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>Next</button>
+            </div>
+        </div>
+
+        <!-- Result Page -->
+        <div id="resultPage" class="result-page"></div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                type: "normal",
+                text: "Your partner tells you they're going to bed early because they're exhausted, even though you wanted to talk tonight. Your honest first thought:",
+                answers: [
+                    { text: "They're avoiding me, something's wrong with us", value: "a", anxious: 1 },
+                    { text: "If they really cared they'd make time even when tired", value: "b", anxious: 1 },
+                    { text: "They're tired, we can talk tomorrow", value: "c", secure: 1 },
+                    { text: "They're probably upset with me and using sleep as an excuse", value: "d", anxious: 1 }
+                ]
+            },
+            {
+                type: "ambiguous",
+                text: "Your partner gets quieter and more distant when they're stressed about work. When this happens, you think:",
+                answers: [
+                    { text: "They're pulling away from me, I need to connect with them", value: "a" },
+                    { text: "This is how they process stress, I should give them room", value: "b", secure: 1 },
+                    { text: "They're shutting me out, they don't trust me enough to share", value: "c" },
+                    { text: "They always use stress as an excuse to disconnect", value: "d" }
+                ]
+            },
+            {
+                type: "toxic",
+                text: "During arguments, your partner tells you you're \"too sensitive\" or \"overreacting\" when you express hurt. Your internal response:",
+                answers: [
+                    { text: "Maybe I am too sensitive, I should calm down", value: "a", boundary_deficit: 1 },
+                    { text: "They're invalidating my feelings to avoid accountability", value: "b", accurate: 1 },
+                    { text: "I need to explain better so they understand why I'm hurt", value: "c", boundary_deficit: 1 },
+                    { text: "They always dismiss me when they don't want to deal with their impact", value: "d", accurate: 1 }
+                ]
+            },
+            {
+                type: "normal",
+                text: "Your partner mentions an ex casually in conversation (not comparing, just a neutral story). What's your honest reaction?",
+                answers: [
+                    { text: "Why are they bringing up their ex? Are they still thinking about them?", value: "a", anxious: 1 },
+                    { text: "That's a normal part of their past, it doesn't threaten me", value: "b", secure: 1 },
+                    { text: "They shouldn't be talking about exes, it's disrespectful", value: "c", anxious: 1 },
+                    { text: "I feel insecure when they mention their ex even though I know it's irrational", value: "d", anxious: 1 }
+                ]
+            },
+            {
+                type: "ambiguous",
+                text: "Your partner scrolls on their phone while you're talking about your day. You think:",
+                answers: [
+                    { text: "They're not interested in me, I'm boring to them", value: "a" },
+                    { text: "This is rude, they should be present when I'm talking", value: "b" },
+                    { text: "They're probably distracted, I should ask if now's a good time", value: "c", secure: 1 },
+                    { text: "They never really listen, they just wait for their turn to talk", value: "d" }
+                ]
+            },
+            {
+                type: "toxic",
+                text: "Your partner brings up mistakes you made months ago during current arguments. When they do this, you think:",
+                answers: [
+                    { text: "I did hurt them, so I understand why they're still upset", value: "a", boundary_deficit: 1 },
+                    { text: "This is weaponizing my past to avoid dealing with the present issue", value: "b", accurate: 1 },
+                    { text: "I need to keep apologizing until they really forgive me", value: "c", boundary_deficit: 1 },
+                    { text: "They do this every time they don't want to take responsibility", value: "d", accurate: 1 }
+                ]
+            },
+            {
+                type: "normal",
+                text: "Your partner doesn't text back for 3-4 hours while they're at work or with friends. What's your honest internal reaction?",
+                answers: [
+                    { text: "Something's wrong, I need to keep texting until they respond", value: "a", anxious: 1 },
+                    { text: "They're probably talking to someone else", value: "b", anxious: 1 },
+                    { text: "If they cared they'd check in, this feels dismissive", value: "c", anxious: 1 },
+                    { text: "They're busy, I'll hear from them when they're free", value: "d", secure: 1 }
+                ]
+            },
+            {
+                type: "ambiguous",
+                text: "During a disagreement, your partner says \"I need space\" and doesn't respond to your texts for 6 hours. What do you think?",
+                answers: [
+                    { text: "They're processing, I should respect that", value: "a" },
+                    { text: "This is silent treatment, they're punishing me", value: "b" },
+                    { text: "I must have really hurt them, I need to apologize and fix this", value: "c" },
+                    { text: "They always do this when they don't want to deal with things", value: "d" }
+                ]
+            },
+            {
+                type: "toxic",
+                text: "Your partner frequently \"forgets\" plans that are important to you, but never forgets things that matter to them. You think:",
+                answers: [
+                    { text: "They're just forgetful, I shouldn't take it personally", value: "a", boundary_deficit: 1 },
+                    { text: "This shows where their priorities are - I'm not one of them", value: "b", accurate: 1 },
+                    { text: "I should remind them more or make it easier for them to remember", value: "c", boundary_deficit: 1 },
+                    { text: "They remember what they want to remember, this is selective", value: "d", accurate: 1 }
+                ]
+            },
+            {
+                type: "normal",
+                text: "Your partner wants to spend Saturday with their friends instead of with you. Your first thought:",
+                answers: [
+                    { text: "We should want to spend all our free time together", value: "a", anxious: 1 },
+                    { text: "They're choosing their friends over me", value: "b", anxious: 1 },
+                    { text: "That's healthy, we don't need to be together constantly", value: "c", secure: 1 },
+                    { text: "If I was enough for them, they wouldn't need other people", value: "d", anxious: 1 }
+                ]
+            },
+            {
+                type: "ambiguous",
+                text: "Your partner seems less interested in sex lately. What's your internal narrative?",
+                answers: [
+                    { text: "They're not attracted to me anymore", value: "a" },
+                    { text: "Something's going on - stress, health, something else - I should ask", value: "b", secure: 1 },
+                    { text: "They're probably getting it somewhere else", value: "c" },
+                    { text: "I'm not doing enough to keep their interest", value: "d" }
+                ]
+            },
+            {
+                type: "toxic",
+                text: "When you try to set a boundary, your partner gets visibly upset, withdraws, or makes you feel guilty. You think:",
+                answers: [
+                    { text: "Maybe my boundary is unreasonable, I should reconsider", value: "a", boundary_deficit: 1 },
+                    { text: "My boundaries make them uncomfortable because they benefit from me not having them", value: "b", accurate: 1 },
+                    { text: "I should find a softer way to communicate my needs", value: "c", boundary_deficit: 1 },
+                    { text: "They can't handle me having any needs that inconvenience them", value: "d", accurate: 1 }
+                ]
+            },
+            {
+                type: "normal",
+                text: "Your partner doesn't want to post about your relationship on social media. Your honest reaction:",
+                answers: [
+                    { text: "They must be hiding me or keeping their options open", value: "a", anxious: 1 },
+                    { text: "They're private about their personal life, that's their choice", value: "b", secure: 1 },
+                    { text: "If they were proud of me, they'd want to show me off", value: "c", anxious: 1 },
+                    { text: "This makes me feel insecure even though I know social media doesn't matter", value: "d", anxious: 1 }
+                ]
+            },
+            {
+                type: "ambiguous",
+                text: "Your partner gets defensive when you bring up something that bothered you. You think:",
+                answers: [
+                    { text: "I must have brought it up the wrong way", value: "a" },
+                    { text: "They can't handle any criticism without shutting down", value: "b" },
+                    { text: "Maybe this isn't the right time, I should wait", value: "c" },
+                    { text: "They always make me the bad guy when I have a concern", value: "d" }
+                ]
+            },
+            {
+                type: "toxic",
+                text: "Your partner tells you that things you remember happening \"never happened\" or you're \"remembering wrong.\" Your internal response:",
+                answers: [
+                    { text: "Maybe I am remembering wrong, my memory isn't perfect", value: "a", boundary_deficit: 1 },
+                    { text: "They're rewriting history to avoid accountability", value: "b", accurate: 1 },
+                    { text: "I must be confusing this with something else", value: "c", boundary_deficit: 1 },
+                    { text: "They gaslight me constantly but I can't prove it", value: "d", accurate: 1 }
+                ]
+            },
+            {
+                type: "normal",
+                text: "Your partner doesn't always respond enthusiastically to your ideas or interests. You think:",
+                answers: [
+                    { text: "They should be excited about things I'm excited about", value: "a", anxious: 1 },
+                    { text: "They don't have to share all my interests, they have their own", value: "b", secure: 1 },
+                    { text: "If they loved me, they'd care more about what I care about", value: "c", anxious: 1 },
+                    { text: "They think my interests are stupid but won't say it", value: "d", anxious: 1 }
+                ]
+            },
+            {
+                type: "ambiguous",
+                text: "Your partner seems irritated or short with you for no clear reason. What's your internal reaction?",
+                answers: [
+                    { text: "What did I do? I need to figure out what's wrong", value: "a" },
+                    { text: "They're having a bad day, it's probably not about me", value: "b", secure: 1 },
+                    { text: "They're mad at me and won't just say it", value: "c" },
+                    { text: "I always have to walk on eggshells around their moods", value: "d" }
+                ]
+            },
+            {
+                type: "toxic",
+                text: "Your partner compares you unfavorably to other people (exes, friends, strangers). When this happens, you think:",
+                answers: [
+                    { text: "Maybe I should work on being more like that", value: "a", boundary_deficit: 1 },
+                    { text: "This is designed to make me feel inadequate and try harder", value: "b", accurate: 1 },
+                    { text: "They're just being honest about what they want", value: "c", boundary_deficit: 1 },
+                    { text: "Nothing I do is ever good enough for them", value: "d", accurate: 1 }
+                ]
+            },
+            {
+                type: "normal",
+                text: "Your partner disagrees with you about something and explains their different perspective. Your honest thought:",
+                answers: [
+                    { text: "If we were really compatible, we'd agree on this", value: "a", anxious: 1 },
+                    { text: "Disagreement is normal, we can have different views", value: "b", secure: 1 },
+                    { text: "They're always contradicting me, they can't just agree", value: "c", anxious: 1 },
+                    { text: "I feel attacked when they don't see things my way", value: "d", anxious: 1 }
+                ]
+            },
+            {
+                type: "ambiguous",
+                text: "Your partner doesn't always comfort you the way you want when you're upset. You think:",
+                answers: [
+                    { text: "They don't care about my feelings", value: "a" },
+                    { text: "They might not know what I need, I should tell them", value: "b", secure: 1 },
+                    { text: "If they really loved me, they'd know what I need without asking", value: "c" },
+                    { text: "They're emotionally unavailable and can't handle my emotions", value: "d" }
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = [];
+
+        // Auto-start quiz on page load
+        window.onload = function() {
+            renderQuestion();
+        };
+
+        function renderQuestion() {
+            const question = questions[currentQuestion];
+            const container = document.getElementById('questionsContainer');
+            
+            container.innerHTML = `
+                <div class="question">
+                    <div class="question-number">Question ${currentQuestion + 1} of ${questions.length}</div>
+                    <div class="question-text">${question.text}</div>
+                    ${question.answers.map((answer, index) => `
+                        <div class="answer-option">
+                            <input type="radio" 
+                                   id="q${currentQuestion}_${index}" 
+                                   name="question${currentQuestion}" 
+                                   value="${answer.value}"
+                                   ${userAnswers[currentQuestion] === answer.value ? 'checked' : ''}
+                                   onchange="selectAnswer('${answer.value}')">
+                            <label for="q${currentQuestion}_${index}">${answer.text}</label>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            updateProgress();
+            updateButtons();
+        }
+
+        function selectAnswer(value) {
+            userAnswers[currentQuestion] = value;
+            updateButtons();
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function updateButtons() {
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            document.getElementById('nextBtn').disabled = !userAnswers[currentQuestion];
+            
+            if (currentQuestion === questions.length - 1 && userAnswers[currentQuestion]) {
+                document.getElementById('nextBtn').textContent = 'See Results';
+            } else {
+                document.getElementById('nextBtn').textContent = 'Next';
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                calculateResults();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function calculateResults() {
+            let anxiousScore = 0;
+            let boundaryDeficitScore = 0;
+            let accurateScore = 0;
+            let secureScore = 0;
+
+            userAnswers.forEach((answer, index) => {
+                const question = questions[index];
+                const selectedAnswer = question.answers.find(a => a.value === answer);
+                
+                if (selectedAnswer) {
+                    anxiousScore += selectedAnswer.anxious || 0;
+                    boundaryDeficitScore += selectedAnswer.boundary_deficit || 0;
+                    accurateScore += selectedAnswer.accurate || 0;
+                    secureScore += selectedAnswer.secure || 0;
+                }
+            });
+
+            displayResults(anxiousScore, boundaryDeficitScore, accurateScore, secureScore);
+        }
+
+        function displayResults(anxious, boundary, accurate, secure) {
+            document.getElementById('quizSection').style.display = 'none';
+            const resultPage = document.getElementById('resultPage');
+            resultPage.classList.add('active');
+
+            let resultHTML = getResultContent(anxious, boundary, accurate, secure);
+            resultPage.innerHTML = resultHTML;
+
+            console.log('Scores:', { anxious, boundary, accurate, secure });
+        }
+
+        
+        function getResultContent(anxious, boundary, accurate, secure) {
+            const maxScores = getMaxScores();
+            const resultKey = determineResult({ anxious, boundary, accurate, secure });
+
+            const scoreDetails = `
+                <details class="score-details">
+                    <summary>See score breakdown</summary>
+                    <div class="score-grid">
+                        <div class="score-pill"><strong>Anxious patterns</strong><span>${anxious} / ${maxScores.anxious}</span></div>
+                        <div class="score-pill"><strong>Boundary self-abandonment</strong><span>${boundary} / ${maxScores.boundary}</span></div>
+                        <div class="score-pill"><strong>Harm recognition</strong><span>${accurate} / ${maxScores.accurate}</span></div>
+                        <div class="score-pill"><strong>Secure baseline</strong><span>${secure} / ${maxScores.secure}</span></div>
+                    </div>
+                </details>
+            `;
+
+            const actions = `
+                <div class="result-actions">
+                    <button class="btn btn-secondary" onclick="restartQuiz()">Start over</button>
+                    <a class="btn btn-secondary" href="/quizzes/nervous-system-response/">Next: Nervous system scan</a>
+                    <a class="cta-button" href="#quiz" onclick="restartQuiz(); return false;">Retake now</a>
+                </div>
+            `;
+
+            const wrap = (inner) => inner.replace('</div>\n                </a>', '</div>\n                </a>'); // no-op, keeps template stable
+            const appendMeta = (content) => content + scoreDetails + actions;
+
+            if (resultKey === 'A') {
+                return appendMeta(`
+                    <div class="result-header">
+                        <h1 class="result-title">Your Anxiety Is Driving The Story</h1>
+                        <p class="result-subtitle">You are reacting to neutral behavior like it is a threat, while still recognizing real manipulation when it shows up</p>
+                    </div>
+                    <div class="result-content">
+                        <p><strong>Your partner might not be the narcissist.</strong> Your answers suggest your nervous system is reading normal autonomy as rejection, and it is turning everyday moments into danger signals.</p>
+
+                        <h3>What you are doing</h3>
+                        <ul>
+                            <li>Assuming distance means loss, instead of capacity</li>
+                            <li>Reading slow replies as abandonment</li>
+                            <li>Interpreting normal boundaries as disrespect</li>
+                            <li>Trying to manage your anxiety by managing them</li>
+                        </ul>
+
+                        <h3>What you got right</h3>
+                        <p>When the quiz showed actual manipulation (gaslighting, guilt, devaluing, boundary punishment), you did not miss it. That means you are not clueless, you are flooded.</p>
+
+                        <h3>What you actually need</h3>
+                        <ul>
+                            <li><strong>Self-soothing skills</strong> for the first 10 minutes of a trigger</li>
+                            <li><strong>Reality checks</strong> before you accuse or pursue</li>
+                            <li><strong>Identity outside the relationship</strong> so their schedule is not your stability</li>
+                        </ul>
+
+                        <p><strong>Bottom line:</strong> you can heal this, but it starts with owning the part where your anxiety is writing the script.</p>
+
+                        <a href="#" class="cta-button">Get the Anxious Attachment Repair Plan</a>
+                    </div>
+                `);
+            }
+
+            if (resultKey === 'B') {
+                return appendMeta(`
+                    <div class="result-header">
+                        <h1 class="result-title">You Are Excusing Real Harm</h1>
+                        <p class="result-subtitle">You are not overreacting, you are absorbing blame for behavior that crosses the line</p>
+                    </div>
+                    <div class="result-content">
+                        <p>Your answers point to a painful pattern, <strong>you keep taking responsibility for tactics that are not your fault.</strong></p>
+
+                        <h3>What you are normalizing</h3>
+                        <ul>
+                            <li>Invalidation, being told you are too sensitive</li>
+                            <li>History rewrites, being told it did not happen</li>
+                            <li>Weaponized past mistakes, dragged out to win now</li>
+                            <li>Boundary guilt, you feel wrong for asking</li>
+                            <li>Comparisons meant to shrink you</li>
+                        </ul>
+
+                        <h3>Why this is dangerous</h3>
+                        <p>Once you start doubting your memory and apologizing for your needs, you lose your internal compass. That is how the damage spreads.</p>
+
+                        <h3>What you need next</h3>
+                        <ul>
+                            <li><strong>Reality anchoring</strong>, write down patterns, not arguments</li>
+                            <li><strong>Boundary training</strong>, stop negotiating basic respect</li>
+                            <li><strong>Support</strong> from people outside the relationship</li>
+                        </ul>
+
+                        <p><strong>Bottom line:</strong> this is not just hard communication, it is a power pattern.</p>
+
+                        <a href="#" class="cta-button">Learn Gaslighting and Boundary Defense</a>
+                    </div>
+                `);
+            }
+
+            if (resultKey === 'C') {
+                return appendMeta(`
+                    <div class="result-header">
+                        <h1 class="result-title">Both Things Are True</h1>
+                        <p class="result-subtitle">Your anxiety is real, and there are also real violations in this dynamic</p>
+                    </div>
+                    <div class="result-content">
+                        <p>Your pattern reads like this, <strong>you over-interpret neutral behaviors and you also under-protect yourself when the line is crossed.</strong></p>
+
+                        <h3>What you are bringing</h3>
+                        <ul>
+                            <li>Threat assumptions about normal space, sleep, and autonomy</li>
+                            <li>Spirals that push you to pursue, explain, and prove</li>
+                        </ul>
+
+                        <h3>What they are bringing</h3>
+                        <ul>
+                            <li>Dismissal and invalidation</li>
+                            <li>Boundary punishment</li>
+                            <li>History rewriting or selective memory</li>
+                        </ul>
+
+                        <h3>The loop</h3>
+                        <p class="arrow">→ You get anxious about normal things<br>
+                        → They use your anxiety to dismiss your valid concerns<br>
+                        → You start doubting your read on reality<br>
+                        → You self-abandon to keep the peace<br>
+                        → Repeat</p>
+
+                        <h3>What you need next</h3>
+                        <ul>
+                            <li><strong>Sort neutral vs harmful</strong>, do not treat them the same</li>
+                            <li><strong>Regulate first</strong>, then speak in one clean sentence</li>
+                            <li><strong>Hold a boundary</strong> when they cross the line, even if you feel guilty</li>
+                        </ul>
+
+                        <a href="#" class="cta-button">Get the Toxic Loop Breaker Plan</a>
+                    </div>
+                `);
+            }
+
+            if (resultKey === 'D') {
+                return appendMeta(`
+                    <div class="result-header">
+                        <h1 class="result-title">Your Control Is Disguised As Concern</h1>
+                        <p class="result-subtitle">Your anxiety is so intense that it is pressuring normal boundaries and turning autonomy into conflict</p>
+                    </div>
+                    <div class="result-content">
+                        <p>Your answers suggest a pattern where <strong>you treat normal human needs like betrayal.</strong> That creates a relationship where your partner is always managing your reactions.</p>
+
+                        <h3>How this shows up</h3>
+                        <ul>
+                            <li>Demanding contact as proof of love</li>
+                            <li>Taking disagreement as rejection</li>
+                            <li>Feeling threatened by privacy, friends, rest, or personal time</li>
+                        </ul>
+
+                        <h3>Hard truth, said clean</h3>
+                        <p>Even if your feelings are real, the behaviors that come from them can become controlling.</p>
+
+                        <h3>What you need next</h3>
+                        <ul>
+                            <li><strong>Individual attachment work</strong>, not couples work first</li>
+                            <li><strong>Trigger protocol</strong>, pause, breathe, one question, then stop</li>
+                            <li><strong>Expand your life</strong> so love is not your only source of stability</li>
+                        </ul>
+
+                        <a href="#" class="cta-button">Get the Anxious Rewire Protocol</a>
+                    </div>
+                `);
+            }
+
+            if (resultKey === 'E') {
+                return appendMeta(`
+                    <div class="result-header">
+                        <h1 class="result-title">Mutually Toxic Dynamic</h1>
+                        <p class="result-subtitle">High anxiety, high self-abandonment, low clarity, this combination breaks people</p>
+                    </div>
+                    <div class="result-content">
+                        <p>This pattern shows <strong>you are flooded and you are also being trained to doubt yourself.</strong> That cocktail destroys reality.</p>
+
+                        <h3>What makes it unstable</h3>
+                        <ul>
+                            <li>You cannot tell what is neutral vs harmful anymore</li>
+                            <li>You apologize for needs, then panic when needs are unmet</li>
+                            <li>They dismiss and rewrite, you pursue and self-abandon</li>
+                        </ul>
+
+                        <h3>What you need next</h3>
+                        <ul>
+                            <li><strong>Outside support</strong>, one person who knows the full story</li>
+                            <li><strong>Stabilization</strong>, sleep, food, nervous system regulation</li>
+                            <li><strong>Distance for clarity</strong>, even if temporary</li>
+                        </ul>
+
+                        <p><strong>Bottom line:</strong> this is beyond a quiz. You need a plan, and you need support.</p>
+
+                        <a href="#" class="cta-button">Get Crisis Support and a Safety Plan</a>
+                    </div>
+                `);
+            }
+
+            if (resultKey === 'F') {
+                return appendMeta(`
+                    <div class="result-header">
+                        <h1 class="result-title">You Are Describing Abuse</h1>
+                        <p class="result-subtitle">This is not anxious overreaction, this looks like systematic dismantling of your boundaries and reality</p>
+                    </div>
+                    <div class="result-content">
+                        <p><strong>You are not the problem here.</strong> Your answers show a pattern of taking blame for tactics that are designed to make you doubt yourself.</p>
+
+                        <h3>What the pattern looks like</h3>
+                        <ul>
+                            <li>They dismiss your feelings, then blame your reaction</li>
+                            <li>They rewrite events, then call you confused</li>
+                            <li>They punish boundaries, then call you selfish</li>
+                            <li>They keep you paying forever for old mistakes</li>
+                        </ul>
+
+                        <h3>What you need next</h3>
+                        <ul>
+                            <li><strong>Safety assessment</strong>, emotional and physical</li>
+                            <li><strong>Documentation</strong>, patterns, dates, screenshots</li>
+                            <li><strong>Trauma-informed support</strong> from someone who understands coercive dynamics</li>
+                        </ul>
+
+                        <p><strong>Bottom line:</strong> you cannot communicate your way out of a reality rewrite.</p>
+
+                        <a href="#" class="cta-button">Get Help With an Exit or Boundary Plan</a>
+                    </div>
+                `);
+            }
+
+            if (resultKey === 'G') {
+                return appendMeta(`
+                    <div class="result-header">
+                        <h1 class="result-title">Mostly Healthy Baseline</h1>
+                        <p class="result-subtitle">You do not catastrophize, you can spot manipulation, and you respect autonomy</p>
+                    </div>
+                    <div class="result-content">
+                        <p>Your answers suggest <strong>a stable internal baseline</strong>. You can tolerate normal space, and you can still recognize when behavior crosses the line.</p>
+
+                        <h3>What you are doing right</h3>
+                        <ul>
+                            <li>Neutral behavior does not trigger panic</li>
+                            <li>You do not self-abandon to keep the peace</li>
+                            <li>You recognize gaslighting and guilt tactics</li>
+                        </ul>
+
+                        <h3>If you still feel uneasy</h3>
+                        <p>Secure people can still have anxious moments, but they can reality-check and self-soothe. If something feels off, trust the pattern, not the mood.</p>
+
+                        <a href="#" class="cta-button">Learn the Secure Repair Skills</a>
+                    </div>
+                `);
+            }
+
+            return appendMeta(`
+                <div class="result-header">
+                    <h1 class="result-title">Mixed Pattern</h1>
+                    <p class="result-subtitle">Your answers do not cluster cleanly, this usually means mixed dynamics or a healing transition</p>
+                </div>
+                <div class="result-content">
+                    <p>This can happen for a few reasons, you are in a relationship with multiple layers, you are mid-healing, or you answered from different time periods.</p>
+                    <p>If you want a clearer result, retake and answer based on the most recent 30 days.</p>
+                    <a href="#" class="cta-button">Get Personalized Interpretation</a>
+                </div>
+            `);
+        }
+
+        function determineResult(s) {
+            // Order matters, most safety-critical first
+            if (s.secure >= 5 && s.accurate >= 4 && s.anxious <= 2 && s.boundary <= 2) return 'G';
+
+            // Abuse and self-blame
+            if (s.boundary >= 5 && s.accurate <= 1 && s.anxious <= 3) return 'F';
+
+            // Excusing harm, not necessarily anxious
+            if (s.boundary >= 4 && s.accurate <= 2 && s.anxious <= 3) return 'B';
+
+            // Mutual toxicity
+            if (s.anxious >= 5 && s.boundary >= 4 && s.accurate <= 2 && s.secure <= 2) return 'E';
+
+            // Both true, common mix
+            if (s.anxious >= 4 && s.accurate >= 3 && s.boundary >= 2) return 'C';
+
+            // Extreme anxious, controlling pressure on autonomy
+            if (s.anxious >= 6 && s.secure <= 1 && s.boundary <= 2 && s.accurate >= 4) return 'D';
+
+            // Anxiety primary, still can spot harm
+            if (s.anxious >= 5 && s.boundary <= 2 && s.accurate >= 4) return 'A';
+
+            return 'X';
+        }
+
+        function getMaxScores() {
+            const max = { anxious: 0, boundary: 0, accurate: 0, secure: 0 };
+            questions.forEach(q => {
+                const best = { anxious: 0, boundary: 0, accurate: 0, secure: 0 };
+                q.answers.forEach(a => {
+                    best.anxious = Math.max(best.anxious, a.anxious || 0);
+                    best.boundary = Math.max(best.boundary, a.boundary_deficit || 0);
+                    best.accurate = Math.max(best.accurate, a.accurate || 0);
+                    best.secure = Math.max(best.secure, a.secure || 0);
+                });
+                max.anxious += best.anxious;
+                max.boundary += best.boundary;
+                max.accurate += best.accurate;
+                max.secure += best.secure;
+            });
+            return max;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            userAnswers = [];
+            document.getElementById('resultPage').classList.remove('active');
+            document.getElementById('resultPage').innerHTML = '';
+            document.getElementById('quizSection').style.display = 'block';
+            document.getElementById('nextBtn').textContent = 'Next';
+            renderQuestion();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <footer style="max-width:1200px;margin:30px auto 40px;padding:0 20px;color:rgba(0,0,0,0.62);font-size:13px;line-height:1.6;">
+        <div style="border-top:1px solid rgba(0,0,0,0.08);padding-top:16px;">
+            <p style="margin:0;">© 2026 Unscarred. Pattern education, not diagnosis.</p>
+            <p style="margin:8px 0 0;">If you are in immediate danger or considering harming yourself, call your local emergency number right now.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

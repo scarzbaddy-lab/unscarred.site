@@ -1,93 +1,55 @@
-# Unscarred.site
+# unscarred.site
 
-Unscarred.site is a static website for Unscarred tools, scans, and interactive pages.
-Built to deploy automatically via Netlify when changes are pushed to GitHub.
+Static site for Unscarred, deployed on Netlify.
 
-## What’s inside
-- Static pages (landing pages, program pages, resources)
-- Interactive scans and quizzes (HTML, CSS, JS)
-- Reusable site styling (shared CSS)
-- Optional local history storage for quiz results (browser localStorage)
+## How this repo is structured
 
-## Tech
-- HTML, CSS, Vanilla JS
-- Netlify deploys from this GitHub repo
+This repo is a plain HTML site. Every route is a folder with an `index.html`.
 
-## Project structure (update if yours differs)
-Common layouts:
-- `index.html` or `/index.html` is the homepage
-- `/pages/` contains routed pages
-- `/assets/` contains styles, scripts, and images
+Examples:
 
-Example:
-- `assets/styles.css`
-- `assets/app.js`
-- `pages/nervous-system-scan/index.html`
+- `/about/` → `about/index.html`
+- `/quizzes/nervous-system-response/` → `quizzes/nervous-system-response/index.html`
+- `/quizzes/are-they-hurting-me/` → `quizzes/are-they-hurting-me/index.html`
 
-## Local development
-Option A: VS Code Live Server
-1. Open the repo in VS Code
-2. Install “Live Server”
-3. Right click `index.html` and select “Open with Live Server”
+Netlify serves `index.html` automatically for each folder route.
 
-Option B: Simple local server (Node)
-1. `npm i -g serve`
-2. `serve .`
-3. Open the local URL it prints
+## Local preview
 
-## Deployment
-Netlify is connected to this repo.
-Every push to the default branch triggers a deploy.
+Use any static server. Two easy options:
 
-If you use a `netlify.toml`, Netlify will follow its build and publish settings.
+### Option 1: VS Code Live Server
+Open the repo in VS Code and run Live Server.
 
-## How to add a new page
-Recommended pattern for clean URLs:
-- Create a folder inside `/pages/`
-- Put an `index.html` inside it
+### Option 2: Python
+```bash
+python -m http.server 8888
+```
+Then open `http://localhost:8888`.
 
-Example:
-- Route: `/nervous-system-scan/`
-- File: `pages/nervous-system-scan/index.html`
+## Add a new page
 
-Checklist:
-1. Copy header and footer from an existing page so styling stays consistent
-2. Add the new route to navigation (header and footer links)
-3. Keep links relative and working on Netlify
-4. Test locally, then push
+1. Create a folder for the route.
+2. Add `index.html` inside it.
+3. Use root absolute links so they work anywhere:
 
-## How to add a new quiz or scan
-1. Duplicate an existing quiz page as a starter
-2. Update:
-   - Page title and meta description
-   - Questions array and scoring logic
-   - Result copy and CTAs
-3. Keep shared styles and buttons consistent
+- Good: `/about/`
+- Avoid: `../about/` or `about.html`
 
-## Content and brand
-- Brand: Unscarred
-- Tone: clear, grounded, emotionally honest
-- Design: dark luxe, soft accent highlights
-Update any palette or font decisions in the main stylesheet so everything stays unified.
+## Navigation rules
 
-## Copilot guidance (optional but recommended)
-If you want GitHub Copilot to build pages consistently, add:
-- `.github/copilot-instructions.md`
+- The header must always include an About link: `/about/`
+- Quizzes live under `/quizzes/`
 
-Keep it focused on:
-- Where pages live
-- How to reuse header and footer
-- How to add routes
-- No new frameworks unless requested
+## Netlify
 
-## Contributing
-- Keep changes small and readable
-- Do not introduce new dependencies unless necessary
-- Favor accessibility: semantic HTML, keyboard usable buttons, good contrast, readable fonts
+This repo is a static site. No build command required.
 
-## License
-All rights reserved unless you add a license file.
+Suggested settings:
 
-## Contact
-Owner: Unscarred
-Site: https://unscarred.site
+- Build command: *(empty)*
+- Publish directory: `/`
+
+## Notes
+
+Unscarred content is education and pattern support, not diagnosis and not medical, psychiatric, or legal advice.
