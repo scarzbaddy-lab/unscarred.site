@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Overview | Unscarred</title>
+    <meta name="description" content="Complete guide to all Unscarred offerings. From free quizzes to memberships to personal coaching. Find the right fit for where you are.">
+    <meta name="keywords" content="services, pricing, membership, coaching, quizzes, trauma recovery, pattern mapping">
+    <meta property="og:title" content="Unscarred | Service Overview">
+    <meta property="og:description" content="All Unscarred offerings explained. Free resources through personal coaching.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://unscarred.site/service-overview.html">
+    <link rel="canonical" content="https://unscarred.site/service-overview.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg-void: #050507;
+      --bg-deep: #0a080c;
+      --bg-mid: #0f0d12;
+      --card-glass: rgba(20, 18, 25, 0.8);
+      --primary: #d97a6e;
+              --primary-glow: rgba(217, 122, 110, 0.2);
+      --accent: #6dd5c0;
+      --accent-glow: rgba(109, 213, 192, 0.15);
+      --text-primary: #e8e5eb;
+              --text-secondary: #a8a5ac;
+              --border: #3a3340;
+}
+
+    * {
+      margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+      }
+
+          html {
+            background: var(--bg-void);
+      color: var(--text-primary);
+      font-family: 'Outfit', sans-serif;
+      line-height: 1.6;
+    }
+
+    body {
+            background: linear-gradient(135deg, var(--bg-void) 0%, var(--bg-deep) 100%);
+      min-height: 100vh;
+}
+
+    header {
+            border-bottom: 1px solid var(--border);
+      padding: 2rem;
+      background: rgba(10, 8, 12, 0.95);
+}
+
+    .header-content {
+            max-width: 1200px;
+      margin: 0 auto;
+}
+
+    h1 {
+            font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+}
+
+    .subtitle {
+            color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+}
+
+    main {
+            max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+}
+
+    section {
+            margin-bottom: 4rem;
+}
+
+    .section-title {
+            font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: var(--primary);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 1rem;
+}
+
+    .offerings-grid {
+            display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+      }
+
+    .offering-card {
+            background: var(--card-glass);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+}
+
+    .offering-card:hover {
+            border-color: var(--accent);
+      background: rgba(30, 28, 35, 0.9);
+      box-shadow: 0 0 20px var(--accent-glow);
+}
+
+    .card-title {
+            font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+}
+
+    .card-price {
+            color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+}
+
+    .card-price.free {
+      color: var(--primary);
+    }
+
+    .card-description {
+            color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+}
+
+    .card-features {
+            list-style: none;
+      margin-bottom: 1.5rem;
+}
+
+    .card-features li {
+            padding-left: 1.5rem;
+      margin-bottom: 0.5rem;
+      position: relative;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+}
+
+    .card-features li:before {
+            content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+}
+
+    .card-cta {
+            display: inline-block;
+      background: var(--primary);
+      color: var(--bg-void);
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+}
+
+    .card-cta:hover {
+            background: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .comparison-table {
+            width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+}
+
+    .comparison-table th,
+          .comparison-table td {
+            padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+}
+
+    .comparison-table th {
+            background: rgba(217, 122, 110, 0.1);
+      color: var(--primary);
+      font-weight: 600;
+}
+
+    .comparison-table tr:hover {
+            background: rgba(109, 213, 192, 0.05);
+}
+
+    .footer-section {
+            background: rgba(217, 122, 110, 0.05);
+      border: 1px solid var(--primary);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 3rem;
+}
+
+    .footer-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+}
+
+    .footer-section p {
+            color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+}
+
+    .footer-section .card-cta {
+            background: var(--accent);
+      color: var(--bg-void);
+}
+
+    .note {
+            background: rgba(109, 213, 192, 0.1);
+      border-left: 4px solid var(--accent);
+      padding: 1rem;
+      border-radius: 4px;
+      margin: 2rem 0;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+}
+
+    @media (max-width: 768px) {
+      h1 {
+                font-size: 2rem;
+    }
+
+      .section-title {
+                font-size: 1.5rem;
+}
+
+      .offerings-grid {
+                grid-template-columns: 1fr;
+}
+}
+  </style>
+        </head>
+        <body>
+          <header>
+            <div class="header-content">
+              <h1>Service Overview</h1>
+              <p class="subtitle">Find the right fit for where you are. From free resources to personal coaching.</p>
+            </div>
+          </header>
+
+          <main>
+            <!-- FREE TIER -->
+            <section>
+              <h2 class="section-title">Free Resources</h2>
+              <div class="offerings-grid">
+                <div class="offering-card">
+                  <h3 class="card-title">Pattern Quizzes</h3>
+                  <div class="card-price free">Free</div>
+                  <p class="card-description">20+ diagnostic quizzes mapping trauma patterns, nervous system adaptations, and personality structures.</p>
+          <ul class="card-features">
+            <li>ADHD masking costs</li>
+            <li>Relationship patterns (BPD edges)</li>
+            <li>CPTSD survival responses</li>
+                    <li>Narcissistic structure patterns</li>
+          </ul>
+          <a href="/quiz/" class="card-cta">Start a Quiz</a>
+                </div>
+
+                <div class="offering-card">
+                  <h3 class="card-title">Learning Library</h3>
+                  <div class="card-price free">Free</div>
+                  <p class="card-description">Educational articles, frameworks, and the complete pattern map explained.</p>
+                  <ul class="card-features">
+                    <li>Activation architecture framework</li>
+            <li>Pattern translation system</li>
+            <li>Nervous system science</li>
+            <li>Evidence-based research</li>
+                  </ul>
+                  <a href="/learn.html" class="card-cta">Explore Library</a>
+                </div>
+
+                <div class="offering-card">
+                  <h3 class="card-title">Blog</h3>
+                  <div class="card-price free">Free</div>
+                  <p class="card-description">Deep dives into specific patterns, real-world applications, and healing approaches.</p>
+          <ul class="card-features">
+            <li>Pattern breakdowns</li>
+            <li>Relationship dynamics</li>
+            <li>Nervous system support</li>
+            <li>Recovery frameworks</li>
+          </ul>
+                  <a href="/blog.html" class="card-cta">Read Articles</a>
+                </div>
+              </div>
+              <div class="note">
+                💡 <strong>Start here if:</strong> You want to explore your patterns, understand what's running, and test whether the framework resonates before investing.
+              </div>
+            </section>
+
+            <!-- MEMBERSHIP TIER -->
+            <section>
+              <h2 class="section-title">Membership</h2>
+              <div class="offerings-grid">
+                <div class="offering-card">
+                  <h3 class="card-title">Personal Support</h3>
+                  <div class="card-price">From $75/month</div>
+                  <p class="card-description">Real-time access when the floor drops. Pattern interrupts and co-regulation from someone who speaks your nervous system language.</p>
+          <ul class="card-features">
+            <li>Real-time text support</li>
+            <li>Pattern interrupts in crisis</li>
+            <li>Nervous system co-regulation</li>
+            <li>Small-by-design cohort</li>
+            <li>Crisis guidance available</li>
+          </ul>
+          <a href="/membership-clarity.html" class="card-cta">Learn More</a>
+                </div>
+
+                <div class="offering-card">
+                  <h3 class="card-title">Membership + Coaching</h3>
+                  <div class="card-price">Custom pricing</div>
+                  <p class="card-description">Personal support membership combined with one-on-one pattern reading sessions. Intensive support option.</p>
+          <ul class="card-features">
+            <li>Everything in Personal Support</li>
+            <li>Monthly deep-dive sessions</li>
+            <li>Personalized pattern map</li>
+            <li>Targeted repair strategies</li>
+            <li>Ongoing direction</li>
+          </ul>
+          <a href="/text-support.html" class="card-cta">Explore Options</a>
+                </div>
+              </div>
+              <div class="note">
+                ⚡ <strong>Choose membership if:</strong> You've identified your patterns and need ongoing support, accountability, or real-time help when activated.
+              </div>
+            </section>
+
+            <!-- INDIVIDUAL SERVICES -->
+            <section>
+              <h2 class="section-title">Individual Services</h2>
+              <div class="offerings-grid">
+                <div class="offering-card">
+                  <h3 class="card-title">Pattern Reading (Individual)</h3>
+                  <div class="card-price">Investment-based</div>
+                  <p class="card-description">Deep dive into your specific nervous system architecture. One-time comprehensive map of what's running.</p>
+                  <ul class="card-features">
+                    <li>Complete pattern analysis</li>
+            <li>Nervous system mapping</li>
+            <li>Survival strategies identified</li>
+            <li>Next steps framework</li>
+            <li>One 90-minute session</li>
+          </ul>
+          <a href="/individual-pattern-reading.html" class="card-cta">Book a Reading</a>
+                </div>
+
+                <div class="offering-card">
+                  <h3 class="card-title">Couple Pattern Reading</h3>
+          <div class="card-price">Investment-based</div>
+          <p class="card-description">Translation for couples, siblings, parent-child relationships. Understand the dance between nervous systems.</p>
+                  <ul class="card-features">
+                    <li>Couple pattern analysis</li>
+            <li>Relationship dynamics mapped</li>
+            <li>Communication repair moves</li>
+            <li>Shared nervous system patterns</li>
+                    <li>One 120-minute session</li>
+                  </ul>
+                  <a href="/couple-pattern-reading.html" class="card-cta">Learn More</a>
+                </div>
+
+                <div class="offering-card">
+                  <h3 class="card-title">Repair Sessions</h3>
+                  <div class="card-price">Per session</div>
+                  <p class="card-description">One-off coaching for specific ruptures, activation patterns, or relationship repair.</p>
+          <ul class="card-features">
+            <li>Targeted pattern work</li>
+            <li>Real-time support</li>
+                    <li>Repair strategy building</li>
+            <li>60-minute deep dive</li>
+            <li>No membership required</li>
+          </ul>
+                  <a href="/calls.html" class="card-cta">Book a Session</a>
+                </div>
+              </div>
+              <div class="note">
+                🎯 <strong>Choose individual services if:</strong> You want expert analysis without ongoing commitment, or need targeted help with a specific pattern or relationship.
+              </div>
+            </section>
+
+            <!-- COMPARISON TABLE -->
+            <section>
+              <h2 class="section-title">Quick Comparison</h2>
+              <table class="comparison-table">
+                <thead>
+                  <tr>
+                    <th>Feature</th>
+                    <th>Free</th>
+                    <th>Membership</th>
+                    <th>1:1 Coaching</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Quizzes</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                  </tr>
+                  <tr>
+                    <td>Library access</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                  </tr>
+                  <tr>
+                    <td>Real-time support</td>
+                    <td>—</td>
+                    <td>✓</td>
+                    <td>✓ (booked)</td>
+                  </tr>
+                  <tr>
+                    <td>Personal pattern map</td>
+            <td>—</td>
+            <td>Available to add</td>
+            <td>✓</td>
+          </tr>
+          <tr>
+            <td>Ongoing coaching</td>
+            <td>—</td>
+                    <td>Available to add</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Best for</td>
+            <td>Exploration</td>
+                    <td>Ongoing support</td>
+                    <td>Targeted work</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+
+            <!-- FOOTER SECTION -->
+            <section>
+              <div class="footer-section">
+                <h3>Not sure where to start?</h3>
+        <p>Take a free quiz to map your pattern, then decide if you need ongoing support or one-time coaching.</p>
+                <a href="/quiz/before-the-label.html" class="card-cta">Take the Assessment</a>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary);">Or <a href="/contact" style="color: var(--accent); text-decoration: none; font-weight: 600;">contact us</a> with questions about which option fits your window right now.</p>
+              </div>
+            </section>
+
+            <div class="note" style="margin-top: 3rem;">
+              <strong>Important:</strong> Unscarred is not therapy, diagnosis, or medical advice. Services are educational pattern mapping and support. For crisis support, contact <a href="tel:988" style="color: var(--accent);">988</a> (Suicide & Crisis Lifeline) or visit your nearest emergency room.
+            </div>
+  </main>
+</body>
+</html>
